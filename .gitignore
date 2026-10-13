@@ -1,0 +1,11 @@
+node_modules/
+dist/
+*.log
+*-preview.png
+*-preview.jpg
+preview.png
+public/media/hero.mp4
+public/media/hero.jpg
+public/media/hero-mist-v1-prompt.txt
+public/media/mist-texture.svg
+waterfall-reference.png
