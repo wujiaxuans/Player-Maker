@@ -5,7 +5,7 @@ export const categories = [
     { title: '在重复里，设计惊喜', en: 'BEYOND THE CORE LOOP', type: '体验设计', image: 'city', desc: '拆解行动、反馈与成长，让每一次循环都有新的期待。', tags: ['体验节奏', '反馈设计'], body: ['核心循环建立预期，变化让预期保持活力。设计的任务是找到稳定感与新鲜感之间的节奏。', '示例练习：用同一套行动规则设计三个遭遇，只改变场地、资源约束或敌人的组合。', '验证重点：玩家是否需要调整策略，而不是机械重复同一种最优解？'] },
   ]},
   { id: 'breakdowns', cn: '游戏拆解', en: 'GAME BREAKDOWNS', intro: '带着玩家的好奇心，去看设计师的每一个决定。', items: [
-    { slug: 'slay-the-spire', title: '杀戮尖塔好玩在哪？拆到最后只剩一句话', en: 'SLAY THE SPIRE', type: '机制拆解', image: 'city', cover: '/media/posts/slay-the-spire/cover.jpg', desc: '从设计师访谈、整局循环到路线、构筑、战斗三层机制，最后拆出它的内核：看得清的取舍。', tags: ['杀戮尖塔', '卡牌构筑', '肉鸽'], body: [
+    { slug: 'slay-the-spire', title: '杀戮尖塔机制拆解：看得清的取舍', en: 'SLAY THE SPIRE', type: '机制拆解', image: 'city', cover: '/media/posts/slay-the-spire/cover.jpg', desc: '从设计师访谈、整局循环到路线、构筑、战斗三层机制，最后拆出它的内核：看得清的取舍。', tags: ['杀戮尖塔', '卡牌构筑', '肉鸽'], body: [
       { h: '① 先看设计师想做什么' },
       '我首先看了 MegaCrit 联合创始人 Anthony Giovannetti 的一期访谈：[Maintainers Anonymous 播客第 8 期](https://maintainersanonymous.com/games/)。',
       '他们一开始就想做一款很重系统的游戏，重点放在玩法机制上，玩家靠一遍遍摸索这些机制慢慢变熟练。',
