@@ -44,7 +44,7 @@ export function useSectionMotion(scope, variant) {
       const timeline = gsap.timeline({ delay: openingVisible ? 2.15 : 0, scrollTrigger: { trigger: root, start: 'top 88%', once: true }, defaults: { ease: 'power4.out' } });
       timeline.from(q('.section-display span'), { yPercent: 115, xPercent: -12, scaleX: .7, rotation: 4, transformOrigin: 'left bottom', duration: 1.65, stagger: .12, clearProps: 'transform' })
         .from(q('.section-rule'), { scaleX: 0, transformOrigin: 'left', duration: 1.4, clearProps: 'transform' }, .25)
-        .from(q('.work-heading, .filter-bar, .footer-main, .footer-bottom'), { y: 45, clipPath: 'inset(100% 0 0 0)', duration: 1.15, stagger: .16, clearProps: 'transform,clipPath' }, .65);
+        .from(q('.work-heading, .filter-bar, .footer-main, .footer-bottom'), { y: 45, clipPath: 'inset(100% 0 0 0)', duration: 1.15, stagger: .16, clearProps: 'transform,clipPath' }, '+=.14');
       const finish = () => timeline.progress(1);
       root.addEventListener('focusin', finish);
       return () => root.removeEventListener('focusin', finish);
@@ -83,5 +83,6 @@ export function useCardsMotion(scope, active, archiveView) {
     return () => { cancelAnimationFrame(refresh); mm.revert(); };
   }, [scope, active, archiveView]);
 }
+
 
 
