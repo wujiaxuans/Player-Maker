@@ -36,7 +36,7 @@ export function Hero({ openingActive }) {
 }
 function ArticleCard({ item, onRead }) {
   return <a className="project-card" href={`#article/${item.id}`} onClick={onRead} aria-label={`阅读：${item.title}`}>
-    <div className="card-image"><div className="card-image-reveal"><img src={`/media/${item.image}.jpg`} alt="" loading="lazy" /></div><div className="image-curtain" aria-hidden="true" /><span className="image-type">{item.category}</span><Arrow /></div>
+    <div className="card-image"><div className="card-image-reveal"><img src={item.cover || `/media/${item.image}.jpg`} alt="" loading="lazy" /></div><div className="image-curtain" aria-hidden="true" /><span className="image-type">{item.category}</span><Arrow /></div>
     <div className="card-body"><div className="card-meta">{item.tags.join(' / ')}</div><h3>{item.title}</h3><p>{item.desc}</p><div className="card-footer"><span>{item.type}</span><span>阅读笔记 ↗</span></div></div>
   </a>;
 }

@@ -5,7 +5,7 @@ import { Header, Hero, Archive, Contact } from './components';
 import { ArticlePage } from './reading';
 import './styles.css';
 
-const articles = categories.flatMap(category => category.items.map((item, index) => ({ ...item, id: `${category.id}-${index + 1}`, category: category.cn, categoryId: category.id })));
+const articles = categories.flatMap(category => category.items.map((item, index) => ({ ...item, id: `${category.id}-${item.slug || index + 1}`, category: category.cn, categoryId: category.id })));
 function App() {
   const [active, setActive] = useState('all');
   const [hash, setHash] = useState(location.hash);

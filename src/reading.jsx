@@ -1,5 +1,28 @@
 import { useEffect, useRef } from 'react';
 
+function Inline({ text }) {
+  const parts = String(text).split(/(\[[^\]]+\]\([^)\s]+\))/g);
+  return parts.map((part, i) => {
+    const m = part.match(/^\[([^\]]+)\]\(([^)\s]+)\)$/);
+    return m ? <a key={i} className="reading-link" href={m[2]} target="_blank" rel="noopener noreferrer">{m[1]}</a> : part;
+  });
+}
+
+function ListItem({ item }) {
+  if (typeof item === 'string') return <li><Inline text={item} /></li>;
+  return <li><strong>{item.t}</strong>：<Inline text={item.d} /></li>;
+}
+
+function BodyBlock({ block }) {
+  if (typeof block === 'string') return <p><Inline text={block} /></p>;
+  if (block.ol || block.ul) { const Tag = block.ol ? 'ol' : 'ul'; return <Tag className="reading-list">{(block.ol || block.ul).map((item, i) => <ListItem key={i} item={item} />)}</Tag>; }
+  if (block.h3) return <h3 className="reading-subhead3">{block.h3}</h3>;
+  if (block.h4) return <h4 className="reading-label">{block.h4}</h4>;
+  if (block.h) return <h2 className="reading-subhead">{block.h}</h2>;
+  if (block.img) return <figure className="reading-figure"><img src={block.img} alt={block.alt || ''} loading="lazy" />{block.caption && <figcaption>{block.caption}</figcaption>}</figure>;
+  return null;
+}
+
 export function ArticlePage({ item, returnHref = '#work' }) {
   const title = useRef(null);
   useEffect(() => {
@@ -11,7 +34,7 @@ export function ArticlePage({ item, returnHref = '#work' }) {
   }, [item]);
   return <div className="reading-page"><header className="reading-nav container"><a className="wordmark" href="#home">P<span>/</span>M.</a><a href={returnHref}>← 返回文章列表</a></header>
     <main className="reading-main"><div className="reading-breadcrumb"><a href={returnHref}>文章</a><span>/</span><span>{item?.category || '文章'}</span></div><h1 tabIndex={-1} ref={title}>{item?.title || '没有找到这篇文章'}</h1>
-    {item ? <><div className="reading-meta"><span>{item.type}</span><span>{item.tags.join(' / ')}</span><span>示例笔记</span></div><p className="reading-lead">{item.desc}</p><img className="reading-cover" src={`/media/${item.image}.jpg`} alt="" /><div className="reading-body">{item.body.map((paragraph, index) => <p key={index}>{paragraph}</p>)}</div><aside className="reading-note">当前为示例内容，后续可替换为完整的设计案例与图文分析。</aside></> : <p>链接可能已变更，你可以返回设计档案查看其他笔记。</p>}
+    {item ? <><div className="reading-meta"><span>{item.type}</span><span>{item.tags.join(' / ')}</span></div><p className="reading-lead">{item.desc}</p><img className="reading-cover" src={item.cover || `/media/${item.image}.jpg`} alt="" /><div className="reading-body">{item.body.map((block, index) => <BodyBlock key={index} block={block} />)}</div></> : <p>链接可能已变更，你可以返回设计档案查看其他笔记。</p>}
     <div className="reading-footer"><a href={returnHref}>← 返回文章列表</a><a href="#archive">浏览全部归档 ↗</a></div></main></div>;
 }
 
