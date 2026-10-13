@@ -4,13 +4,15 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 const conditions = { desktop: '(min-width: 701px)', mobile: '(max-width: 700px)', reduce: '(prefers-reduced-motion: reduce)' };
+let openingHasPlayed = false;
 
 // Component-scoped contexts clean up animations and triggers on navigation.
 export function useOpening(scope, active) {
   useLayoutEffect(() => {
     const mm = gsap.matchMedia();
     mm.add(conditions, ({ conditions: { reduce, desktop } }) => {
-      if (reduce || !active) return;
+      if (reduce || !active || openingHasPlayed) return;
+      const openingInitialized = requestAnimationFrame(() => { openingHasPlayed = true; });
       const root = scope.current;
       const q = gsap.utils.selector(root);
       const timeline = gsap.timeline({ defaults: { ease: 'power4.inOut' } });
@@ -27,7 +29,7 @@ export function useOpening(scope, active) {
       const finish = () => timeline.progress(1);
       root.addEventListener('focusin', finish);
       if (desktop) gsap.to(q('.hero-poster'), { yPercent: 9, ease: 'none', scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: 1.4 } });
-      return () => root.removeEventListener('focusin', finish);
+      return () => { cancelAnimationFrame(openingInitialized); root.removeEventListener('focusin', finish); };
     }, scope);
     return () => mm.revert();
   }, [scope, active]);
