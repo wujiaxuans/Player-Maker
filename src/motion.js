@@ -4,18 +4,27 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 const conditions = { desktop: '(min-width: 701px)', mobile: '(max-width: 700px)', reduce: '(prefers-reduced-motion: reduce)' };
-let openingHasPlayed = false;
+const played = new Set();
+
+// Defer setup until React has finished its development setup/cleanup rehearsal.
+// Cancel an unstarted setup instead of consuming the visit's entrance animation.
+function mountMotion(scope, setup) {
+  const mm = gsap.matchMedia();
+  const frame = requestAnimationFrame(() => {
+    mm.add(conditions, setup, scope);
+    ScrollTrigger.refresh();
+  });
+  return () => { cancelAnimationFrame(frame); mm.revert(); };
+}
 
 // Component-scoped contexts clean up animations and triggers on navigation.
 export function useOpening(scope, active) {
   useLayoutEffect(() => {
-    const mm = gsap.matchMedia();
-    mm.add(conditions, ({ conditions: { reduce, desktop } }) => {
-      if (reduce || !active || openingHasPlayed) return;
-      const openingInitialized = requestAnimationFrame(() => { openingHasPlayed = true; });
+    return mountMotion(scope, ({ conditions: { reduce, desktop } }) => {
+      if (reduce || !active || played.has('opening')) return;
       const root = scope.current;
       const q = gsap.utils.selector(root);
-      const timeline = gsap.timeline({ defaults: { ease: 'power4.inOut' } });
+      const timeline = gsap.timeline({ defaults: { ease: 'power4.inOut' }, onStart: () => played.add('opening') });
       timeline.set(q('.opening'), { visibility: 'visible' })
         .fromTo(q('.opening-rule'), { scaleX: 0 }, { scaleX: 1, duration: 1.05 }, 0)
         .fromTo(q('.opening-label span'), { yPercent: 110 }, { yPercent: 0, duration: .9, stagger: .08 }, .08)
@@ -29,78 +38,73 @@ export function useOpening(scope, active) {
       const finish = () => timeline.progress(1);
       root.addEventListener('focusin', finish);
       if (desktop) gsap.to(q('.hero-poster'), { yPercent: 9, ease: 'none', scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: 1.4 } });
-      return () => { cancelAnimationFrame(openingInitialized); root.removeEventListener('focusin', finish); };
-    }, scope);
-    return () => mm.revert();
+      return () => root.removeEventListener('focusin', finish);
+    });
   }, [scope, active]);
 }
 
-export function useSectionMotion(scope, variant) {
+export function useSectionMotion(scope, variant, active) {
   useLayoutEffect(() => {
-    const mm = gsap.matchMedia();
-    mm.add(conditions, ({ conditions: { reduce } }) => {
+    return mountMotion(scope, ({ conditions: { reduce, desktop } }) => {
       if (reduce) return;
       const root = scope.current;
       const q = gsap.utils.selector(root);
       const key = root.id === 'contact' ? 'footer' : 'articles';
-      if (animatedSections.has(key)) return;
-      const timeline = gsap.timeline({ defaults: { ease: 'power4.out' }, scrollTrigger: {
-        trigger: root, start: 'top 88%', once: true,
-        onEnter: () => animatedSections.add(key)
-      } });
-      timeline.from(q('.section-display span'), { yPercent: 115, xPercent: -12, scaleX: .7, rotation: 4, transformOrigin: 'left bottom', duration: 1.65, stagger: .12, clearProps: 'transform' })
-        .from(q('.section-rule'), { scaleX: 0, transformOrigin: 'left', duration: 1.4, clearProps: 'transform' }, '+=.08');
+      if (played.has(key)) return;
+      const timeline = gsap.timeline({
+        defaults: { ease: 'power4.out' },
+        onStart: () => played.add(key),
+        scrollTrigger: { trigger: root, start: 'top 78%', once: true }
+      });
+      timeline.from(q('.section-display span'), {
+        yPercent: 115, xPercent: -12, scaleX: .7, rotation: 4,
+        transformOrigin: 'left bottom', duration: 1.65, stagger: .12,
+        clearProps: 'transform'
+      }, 0)
+        .from(q('.section-rule'), {
+          scaleX: 0, transformOrigin: 'left', duration: 1.4, clearProps: 'transform'
+        }, .55);
       if (key === 'footer') {
-        timeline.from(q('.footer-main'), { y: 45, clipPath: 'inset(100% 0 0 0)', duration: 1.15, clearProps: 'transform,clipPath' }, '+=.12')
-          .from(q('.footer-bottom'), { y: 30, clipPath: 'inset(100% 0 0 0)', duration: .9, clearProps: 'transform,clipPath' }, '+=.1');
+        timeline.from(q('.footer-main'), {
+          y: 45, clipPath: 'inset(100% 0 0 0)', duration: 1.15,
+          clearProps: 'transform,clipPath'
+        }, .9)
+          .from(q('.footer-bottom'), {
+            y: 30, clipPath: 'inset(100% 0 0 0)', duration: .9,
+            clearProps: 'transform,clipPath'
+          }, 1.1);
       } else {
-        timeline.from(q('.work-heading h2'), { y: 40, clipPath: 'inset(100% 0 0 0)', duration: 1.05, clearProps: 'transform,clipPath' }, '+=.12')
-          .from(q('.work-heading > p'), { y: 35, clipPath: 'inset(100% 0 0 0)', duration: 1.05, clearProps: 'transform,clipPath' }, '+=.1')
-          .from(q('.filter-bar'), { y: 28, clipPath: 'inset(100% 0 0 0)', duration: .9, clearProps: 'transform,clipPath' }, '+=.1');
+        timeline.from(q('.work-heading'), {
+          y: 40, clipPath: 'inset(100% 0 0 0)', duration: 1.05,
+          clearProps: 'transform,clipPath'
+        }, .8)
+          .from(q('.filter-bar'), {
+            y: 28, clipPath: 'inset(100% 0 0 0)', duration: .9,
+            clearProps: 'transform,clipPath'
+          }, 1);
+
+        // One timeline owns every card: later rows can never overtake the first.
+        const cards = q('.project-card, .archive-item');
+        const images = q('.card-image-reveal');
+        const covers = q('.image-curtain');
+        timeline.from(cards, {
+          y: desktop ? 115 : 65, clipPath: 'inset(0 0 100% 0)',
+          duration: 1.55, stagger: .16, clearProps: 'transform,clipPath'
+        }, 1.15);
+        if (images.length) timeline
+          .fromTo(covers, { scaleY: 1 }, {
+            scaleY: 0, duration: 1.35, stagger: .16, ease: 'power4.inOut'
+          }, 1.3)
+          .from(images, {
+            scale: 1.18, duration: 1.9, stagger: .16, clearProps: 'transform'
+          }, 1.3);
       }
-      const finish = () => timeline.progress(1);
+      const finish = () => {
+        played.add(key);
+        timeline.progress(1);
+      };
       root.addEventListener('focusin', finish);
       return () => root.removeEventListener('focusin', finish);
-    }, scope);
-    return () => mm.revert();
-  }, [scope, variant]);
+    });
+  }, [scope, variant, active]);
 }
-export function useCardsMotion(scope, active, archiveView) {
-  useLayoutEffect(() => {
-    const mm = gsap.matchMedia();
-    mm.add(conditions, ({ conditions: { reduce, desktop } }) => {
-      if (reduce) return;
-      const root = scope.current;
-      const cards = Array.from(root.querySelectorAll('.project-card, .archive-item'));
-      if (articleCardsHaveEntered) return;
-      const cardsInitialized = requestAnimationFrame(() => { articleCardsHaveEntered = true; });
-      const listeners = [];
-      const columns = desktop && !archiveView ? 2 : 1;
-      for (let i = 0; i < cards.length; i += columns) {
-        const row = cards.slice(i, i + columns);
-        const images = row.map(card => card.querySelector('.card-image-reveal')).filter(Boolean);
-        const covers = row.map(card => card.querySelector('.image-curtain')).filter(Boolean);
-        const timeline = gsap.timeline({ scrollTrigger: { trigger: row[0], start: 'top 96%', once: true, onEnter: () => { articleCardsHaveEntered = true; } }, defaults: { ease: 'power4.out' }, delay: i === 0 ? ((!location.hash || location.hash === '#home') && window.scrollY < 10 ? 2.9 : .7) : 0 });
-        timeline.from(row, { y: desktop ? 115 : 65, clipPath: 'inset(0 0 100% 0)', duration: 1.55, stagger: .22, clearProps: 'transform,clipPath' });
-        if (images.length) timeline.fromTo(covers, { scaleY: 1 }, { scaleY: 0, duration: 1.35, stagger: .22, ease: 'power4.inOut' }, .15)
-          .from(images, { scale: 1.18, duration: 1.9, stagger: .22, clearProps: 'transform' }, .15);
-        row.forEach(card => {
-          const finish = () => timeline.progress(1);
-          card.addEventListener('focusin', finish);
-          listeners.push(() => card.removeEventListener('focusin', finish));
-        });
-      }
-      if (desktop && !archiveView) cards.forEach(card => gsap.fromTo(card.querySelector('img'), { yPercent: -5 }, { yPercent: 5, ease: 'none', scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: 1.2 } }));
-      return () => { cancelAnimationFrame(cardsInitialized); listeners.forEach(remove => remove()); };
-    }, scope);
-    const refresh = requestAnimationFrame(() => ScrollTrigger.refresh());
-    return () => { cancelAnimationFrame(refresh); mm.revert(); };
-  }, [scope, active, archiveView]);
-}
-
-
-
-const animatedSections = new Set();
-let articleCardsHaveEntered = false;
-
-

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useOpening, useSectionMotion, useCardsMotion } from './motion';
+import { useOpening, useSectionMotion } from './motion';
 
 function Arrow({ down = false }) {
   return <svg className="arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d={down ? 'M12 4v16m-6-6 6 6 6-6' : 'M5 19 19 5M5 5h14v14'} stroke="currentColor" strokeWidth="1.4" /></svg>;
@@ -42,8 +42,7 @@ function ArticleCard({ item, onRead }) {
 }
 export function Archive({ categories, articles, active, onSelect, archiveView, onRead }) {
   const root = useRef(null);
-  useSectionMotion(root, archiveView);
-  useCardsMotion(root, active, archiveView);
+  useSectionMotion(root, archiveView, active);
   const filters = [{ id: 'all', cn: '全部' }, ...categories];
   const filtered = active === 'all' ? articles : articles.filter(item => item.categoryId === active);
   const shown = archiveView ? filtered : filtered.slice(0, 6);
