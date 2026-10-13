@@ -71,6 +71,7 @@ export function useCardsMotion(scope, active, archiveView) {
       const root = scope.current;
       const cards = Array.from(root.querySelectorAll('.project-card, .archive-item'));
       if (articleCardsHaveEntered) return;
+      const cardsInitialized = requestAnimationFrame(() => { articleCardsHaveEntered = true; });
       const listeners = [];
       const columns = desktop && !archiveView ? 2 : 1;
       for (let i = 0; i < cards.length; i += columns) {
