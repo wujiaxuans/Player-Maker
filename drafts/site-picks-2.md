@@ -1,15 +1,12 @@
 ---
 title: "小体量，大想法"
-en: "SMALL GAMES, BIG IDEAS"
-type: "游玩方向"
-desc: "从一条简单规则出发，寻找独立游戏的表达可能。"
-tags: ["独立游戏","创意观察"]
-date: "2026-10-14"
-image: "landscape"
-order: 2
-draft_id: "site-picks-2"
+video_title: "小体量，大想法"
 source: "site://picks/2"
 author: "PLAYER / MAKER"
+desc: "从一条简单规则出发，寻找独立游戏的表达可能。"
+type: "游玩方向"
+tags: ["独立游戏","创意观察"]
+draft_id: "site-picks-2"
 ---
 
 此处为精选推荐模块的示例，后续可加入游戏名称、推荐理由与商店链接。
