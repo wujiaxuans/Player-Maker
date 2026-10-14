@@ -1,4 +1,4 @@
-import { github, json, draftPath } from '../_lib/github.js';
+import { github, json, draftPath, decodeDraftName } from '../_lib/github.js';
 import { parseFrontMatter, stringifyFrontMatter } from '../../src/markdown.js';
 import { categories } from '../../src/data.js';
 
@@ -6,13 +6,16 @@ export function buildPost(draft, input, today = new Date().toISOString().slice(0
   const { data, body } = parseFrontMatter(draft);
   if (!data.source || !data.author) throw Object.assign(new Error('草稿缺少 source / author（原视频链接和UP主），不能发布'), { status: 400 });
   const credit = `> 本文是视频学习笔记。原视频：[${data.video_title || data.title || data.source}](${data.source})，UP主：${data.author}。版权归原作者所有。`;
+  const stripped = body.replace(/^\s*#\s+.*\n/, '').replace(/^\s*>\s*本文是视频学习笔记[\s\S]*?(?:\n\n|$)/, '');
+  const draftId = String(input.draft_id || decodeDraftName(input.name || '').replace(/\.md$/i, '') || data.draft_id || '').replace(/\.md$/i, '');
   const fm = {
     title: input.title || data.title, en: input.en || '', type: input.type || '视频笔记', desc: input.desc || data.desc || '',
     tags: Array.isArray(input.tags) ? input.tags.slice(0, 10).map(String) : [], date: today,
     source: data.source, author: data.author, image: 'architecture',
     cover: input.cover || data.cover || undefined,
+    draft_id: draftId || undefined,
   };
-  return stringifyFrontMatter(fm, `${credit}\n\n${body.replace(/^\s*#\s+.*\n/, '')}`);
+  return stringifyFrontMatter(fm, `${credit}\n\n${stripped}`);
 }
 
 export async function onRequestPost({ env, request, data: ctx }) {
@@ -26,5 +29,5 @@ export async function onRequestPost({ env, request, data: ctx }) {
   if (await gh.exists(dest)) return json({ error: `已存在同名文章：${dest}` }, 409);
   const { content } = await gh.get(src);
   const sha = await gh.commit([{ path: dest, content: buildPost(content, input) }, { path: src, delete: true }], `admin: publish ${input.name} -> ${dest} (${ctx.email})`);
-  return json({ ok: true, path: dest, commit: sha });
+  return json({ ok: true, path: dest, category: input.category, slug: input.slug, commit: sha });
 }

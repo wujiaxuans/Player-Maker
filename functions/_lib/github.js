@@ -86,3 +86,37 @@ export function titleFromNote(text) {
   if (labeled) return labeled[1].trim();
   return '';
 }
+
+/** ASCII category + slug for content/posts/<category>/<slug>.md */
+export const CATEGORY_RE = /^[a-z][a-z0-9-]{0,40}$/;
+export const SLUG_RE = /^[a-z0-9-]{1,80}$/;
+
+export function decodeParam(raw) {
+  let n = typeof raw === 'string' ? raw : '';
+  try { n = decodeURIComponent(n); } catch { /* keep raw */ }
+  return n;
+}
+
+export function postPath(category, slug) {
+  const c = decodeParam(category);
+  const s = decodeParam(slug).replace(/\.md$/i, '');
+  if (!CATEGORY_RE.test(c)) throw Object.assign(new Error('分类无效'), { status: 400 });
+  if (!SLUG_RE.test(s)) throw Object.assign(new Error('链接名无效'), { status: 400 });
+  return `content/posts/${c}/${s}.md`;
+}
+
+/** Prefer front-matter draft_id, else BV/YT from source or slug. */
+export function draftNameFromPost(content, slug = '') {
+  const src = String(content || '');
+  const fence = src.match(/^---\n([\s\S]*?)\n---/);
+  if (fence) {
+    const line = fence[1].split('\n').find(l => /^draft_id:\s*/.test(l));
+    if (line) {
+      let v = line.replace(/^draft_id:\s*/, '').trim();
+      try { v = JSON.parse(v); } catch { /* keep */ }
+      v = String(v || '').replace(/\.md$/i, '');
+      if (v && DRAFT_NAME_RE.test(`${v}.md`)) return `${v}.md`;
+    }
+  }
+  return draftFileName(src, String(slug || '').replace(/\.md$/i, ''));
+}

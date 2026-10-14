@@ -90,3 +90,11 @@
   .admin-header .nav { display: flex; }
   .admin-header .menu-toggle { display: none; }
 }
+
+.admin-form textarea.admin-textarea,
+.admin-textarea {
+  padding: 10px 12px; font: inherit; font-size: 13px; line-height: 1.6; color: var(--text);
+  background: #121820; border: 1px solid var(--line); border-radius: 3px;
+  width: 100%; min-height: 280px; resize: vertical; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.admin-textarea:focus { outline: 1px solid var(--accent); border-color: var(--accent); }
