@@ -13,7 +13,7 @@ function ListItem({ item }) {
   return <li><strong>{item.t}</strong>：<Inline text={item.d} /></li>;
 }
 
-function BodyBlock({ block }) {
+export function BodyBlock({ block }) {
   if (typeof block === 'string') return <p><Inline text={block} /></p>;
   if (block.ol || block.ul) { const Tag = block.ol ? 'ol' : 'ul'; return <Tag className="reading-list">{(block.ol || block.ul).map((item, i) => <ListItem key={i} item={item} />)}</Tag>; }
   if (block.h3) return <h3 className="reading-subhead3">{block.h3}</h3>;

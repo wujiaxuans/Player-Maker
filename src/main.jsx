@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { categories } from './data';
+import { categories } from './posts';
 import { Header, Hero, Archive, Contact } from './components';
 import { ArticlePage } from './reading';
 import './styles.css';
