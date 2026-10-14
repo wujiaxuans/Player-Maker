@@ -1,15 +1,12 @@
 ---
 title: "值得随身携带的设计问题"
-en: "A DESIGNER’S NOTEBOOK"
-type: "阅读方向"
-desc: "把阅读变成提问，再把问题带回自己的设计现场。"
-tags: ["设计阅读","思维工具"]
-date: "2026-10-14"
-image: "architecture"
-order: 1
-draft_id: "site-picks-1"
+video_title: "值得随身携带的设计问题"
 source: "site://picks/1"
 author: "PLAYER / MAKER"
+desc: "把阅读变成提问，再把问题带回自己的设计现场。"
+type: "阅读方向"
+tags: ["设计阅读","思维工具"]
+draft_id: "site-picks-1"
 ---
 
 此处为精选推荐模块的示例，后续可替换为你的书单和短评。
