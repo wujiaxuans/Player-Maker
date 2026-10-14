@@ -1,15 +1,12 @@
 ---
 title: "从想法到可玩的第一步"
-en: "MAKE IT PLAYABLE"
-type: "实践方向"
-desc: "用低成本原型，尽快回答最重要的设计问题。"
-tags: ["原型制作","工作流"]
-date: "2026-10-14"
-image: "city"
-order: 3
-draft_id: "site-picks-3"
+video_title: "从想法到可玩的第一步"
 source: "site://picks/3"
 author: "PLAYER / MAKER"
+desc: "用低成本原型，尽快回答最重要的设计问题。"
+type: "实践方向"
+tags: ["原型制作","工作流"]
+draft_id: "site-picks-3"
 ---
 
 此处为工具与实践资源的示例，后续可替换为真实使用过的资源。
