@@ -4,7 +4,7 @@ function Inline({ text }) {
   const parts = String(text).split(/(\[[^\]]+\]\([^)\s]+\))/g);
   return parts.map((part, i) => {
     const m = part.match(/^\[([^\]]+)\]\(([^)\s]+)\)$/);
-    return m ? <a key={i} className="reading-link" href={m[2]} target="_blank" rel="noopener noreferrer">{m[1]}</a> : part;
+    return m ? <a key={i} className="reading-link" href={m[2]} {...(m[2].startsWith('#') ? {} : { target: '_blank', rel: 'noopener noreferrer' })}>{m[1]}</a> : part;
   });
 }
 
