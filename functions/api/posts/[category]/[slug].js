@@ -66,8 +66,9 @@ export async function onRequestPut({ env, params, request, data: ctx }) {
     image: existing.image || 'architecture',
     cover: input.cover != null ? (input.cover || undefined) : existing.cover,
     draft_id: existing.draft_id || undefined,
+    order: existing.order != null ? existing.order : undefined,
   };
-  // Never drop source/author on edit
+  // Site-native posts use site:// source; video notes need real source/author
   if (!fm.source || !fm.author) return json({ error: '文章缺少 source / author，不能保存' }, 400);
 
   const next = stringifyFrontMatter(fm, body);

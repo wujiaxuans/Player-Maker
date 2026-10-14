@@ -8,6 +8,7 @@ author: "字幕装填中（搬运/翻译；原作者自称 Zachary，独立开�
 image: "architecture"
 cover: "/media/covers/BV1mbDSB5EGx.png"
 draft_id: "BV1mbDSB5EGx"
+order: 10
 ---
 
 > 本文是视频学习笔记。原视频：[【游戏开发经验】个人开发者全栈指南：从像素美术到引擎，我如何一人打造游戏](https://www.bilibili.com/video/BV1mbDSB5EGx)，UP主：字幕装填中（搬运/翻译；原作者自称 Zachary，独立开发者）。版权归原作者所有。

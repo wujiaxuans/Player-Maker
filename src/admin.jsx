@@ -46,9 +46,14 @@ function AdminHeader({ section, onSection }) {
   );
 }
 
+function sectionFromHash() {
+  const h = (typeof location !== 'undefined' ? location.hash : '').replace(/^#/, '');
+  return h === 'published' ? 'published' : 'drafts';
+}
+
 function Admin() {
-  const [section, setSection] = useState('drafts'); // drafts | published
-  const [tab, setTab] = useState('drafts'); // drafts | methods | breakdowns | picks | all
+  const [section, setSection] = useState(sectionFromHash); // drafts | published
+  const [tab, setTab] = useState(() => (sectionFromHash() === 'published' ? 'all' : 'drafts')); // drafts | methods | breakdowns | picks | all
   const [drafts, setDrafts] = useState([]);
   const [posts, setPosts] = useState([]);
   const [current, setCurrent] = useState(null); // { kind, name|category+slug, content, sha }
@@ -76,6 +81,22 @@ function Admin() {
 
   useEffect(() => { loadAll(); }, []);
 
+  useEffect(() => {
+    const onHash = () => {
+      const next = sectionFromHash();
+      setSection(next);
+      setCurrent(null);
+      setTab(next === 'drafts' ? 'drafts' : 'all');
+      setStatus('');
+    };
+    window.addEventListener('hashchange', onHash);
+    // Normalize empty hash to #drafts so refresh stays consistent
+    if (!location.hash || (location.hash !== '#drafts' && location.hash !== '#published')) {
+      history.replaceState(null, '', `#${sectionFromHash()}`);
+    }
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+
   const openDraft = async name => {
     setStatus('');
     try {
@@ -96,6 +117,7 @@ function Admin() {
       });
       setSection('drafts');
       setTab('drafts');
+      if (location.hash !== '#drafts') location.hash = 'drafts';
       window.scrollTo({ top: 0, behavior: 'instant' });
     } catch (e) { setStatus(`打开失败：${e.message}`); }
   };
@@ -119,6 +141,7 @@ function Admin() {
       });
       setSection('published');
       setTab(category);
+      if (location.hash !== '#published') location.hash = 'published';
       window.scrollTo({ top: 0, behavior: 'instant' });
     } catch (e) { setStatus(`打开失败：${e.message}`); }
   };
@@ -166,6 +189,7 @@ function Admin() {
       setCurrent(null);
       setSection('published');
       setTab(form.category);
+      if (location.hash !== '#published') location.hash = 'published';
       await loadAll();
     } catch (e) { setStatus(`发布失败：${e.message}`); } finally { setBusy(false); }
   };
@@ -216,6 +240,7 @@ function Admin() {
       setCurrent(null);
       setSection('drafts');
       setTab('drafts');
+      if (location.hash !== '#drafts') location.hash = 'drafts';
       await loadAll();
     } catch (e) { setStatus(`退回失败：${e.message}`); } finally { setBusy(false); }
   };
@@ -227,10 +252,12 @@ function Admin() {
     : posts.filter(p => p.category === tab);
 
   const goSection = s => {
-    setSection(s);
+    const next = s === 'published' ? 'published' : 'drafts';
+    setSection(next);
     setCurrent(null);
-    setTab(s === 'drafts' ? 'drafts' : 'all');
+    setTab(next === 'drafts' ? 'drafts' : 'all');
     setStatus('');
+    if (location.hash !== `#${next}`) location.hash = next;
   };
 
   if (current) {
@@ -341,7 +368,7 @@ function Admin() {
               </div>
               <p>{section === 'drafts'
                 ? <>预览笔记、选分类后点「发布」，文章会出现在「已发布」并进入博客对应分页。</>
-                : <>管理已从草稿发布的文章：改内容 / 分类，或退回草稿箱。列表实时读仓库，不等构建。</>}</p>
+                : <>管理博客全部已发布文章：改内容 / 分类，或退回草稿箱。列表实时读仓库，不等构建。</>}</p>
             </div>
 
             {status && <p className="admin-status" role="status">{status}</p>}
@@ -421,8 +448,8 @@ function Admin() {
                 <p className="admin-muted admin-pad">加载已发布文章…</p>
               ) : filteredPublished.length === 0 ? (
                 <div className="admin-empty-card">
-                  <p className="admin-empty-title">还没有从草稿发布的文章</p>
-                  <p className="admin-muted">在草稿箱发布后会出现在这里（博客旧文章不在此列表）。</p>
+                  <p className="admin-empty-title">还没有已发布文章</p>
+                  <p className="admin-muted">博客上的全部文章都会出现在这里，可编辑或退回草稿箱。</p>
                 </div>
               ) : (
                 <div className="card-grid admin-draft-grid">

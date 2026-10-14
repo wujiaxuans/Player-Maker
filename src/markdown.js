@@ -21,6 +21,13 @@ export function stringifyFrontMatter(data, body) {
 
 const clean = s => s.replace(/\*\*([^*]+)\*\*/g, '$1').replace(/`([^`]+)`/g, '$1').trim();
 
+/** List item: `**title**：desc` → { t, d }; otherwise plain string. */
+function listItem(raw) {
+  const m = String(raw).match(/^\*\*(.+?)\*\*[：:]\s*(.*)$/);
+  if (m) return { t: clean(m[1]), d: clean(m[2]) };
+  return clean(raw);
+}
+
 export function markdownToBlocks(md) {
   const blocks = [];
   let para = [];
@@ -40,8 +47,8 @@ export function markdownToBlocks(md) {
       continue;
     }
     if ((m = line.match(/^!\[([^\]]*)\]\(([^)\s]+)\)\s*$/))) { flushPara(); flushList(); blocks.push({ img: m[2], alt: m[1], caption: m[1] || undefined }); continue; }
-    if ((m = line.match(/^\s*[-*+]\s+(.*)$/))) { flushPara(); if (!list || !list.ul) { flushList(); list = { ul: [] }; } list.ul.push(clean(m[1])); continue; }
-    if ((m = line.match(/^\s*\d+[.)]\s+(.*)$/))) { flushPara(); if (!list || !list.ol) { flushList(); list = { ol: [] }; } list.ol.push(clean(m[1])); continue; }
+    if ((m = line.match(/^\s*[-*+]\s+(.*)$/))) { flushPara(); if (!list || !list.ul) { flushList(); list = { ul: [] }; } list.ul.push(listItem(m[1])); continue; }
+    if ((m = line.match(/^\s*\d+[.)]\s+(.*)$/))) { flushPara(); if (!list || !list.ol) { flushList(); list = { ol: [] }; } list.ol.push(listItem(m[1])); continue; }
     flushList();
     para.push(line.replace(/^>\s?/, ''));
   }
@@ -56,6 +63,7 @@ export function postFromMarkdown(text, fallbackSlug) {
     slug: data.slug || fallbackSlug, title: data.title || fallbackSlug, en: data.en || '', type: data.type || '视频笔记',
     image: data.image || 'architecture', cover: data.cover || undefined, desc: data.desc || '', tags,
     date: data.date || '', source: data.source || '', author: data.author || '',
+    order: data.order != null ? Number(data.order) || 0 : 0,
     body: markdownToBlocks(body),
   };
 }

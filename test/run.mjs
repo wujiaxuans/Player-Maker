@@ -15,6 +15,8 @@ let n = 0; const t = async (name, fn) => { await fn(); n++; console.log('ok', na
 await t('markdown blocks', () => {
   const b = markdownToBlocks('# T\n\n## 00:00 开场\n- a **b**\n- c\n\n1. x\n2. y\n\npara\nline\n\n### s\n#### l\n![cap](/a.png)');
   assert.deepEqual(b, [{ h: '00:00 开场' }, { ul: ['a b', 'c'] }, { ol: ['x', 'y'] }, 'paraline', { h3: 's' }, { h4: 'l' }, { img: '/a.png', alt: 'cap', caption: 'cap' }]);
+  const titled = markdownToBlocks('1. **设计师想做什么**：先写目的。\n2. plain');
+  assert.deepEqual(titled, [{ ol: [{ t: '设计师想做什么', d: '先写目的。' }, 'plain'] }]);
 });
 
 await t('publish builds credited post with draft_id', () => {
