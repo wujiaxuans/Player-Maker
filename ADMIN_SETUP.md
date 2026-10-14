@@ -44,7 +44,7 @@ Workers & Pages → 你的博客项目 → Settings → **Variables and Secrets*
 ## 四、使用
 
 1. 打开 `/admin`，输入邮箱收验证码登录。
-2. 左侧点草稿 → 右侧预览；选分类、填链接名（小写字母/数字/-）、标题、摘要、标签。
+2. 打开「草稿箱」分页，点卡片进入审核；选分类、填链接名（小写字母/数字/-）、标题、摘要、标签、封面路径。
 3. 点「发布」：一次提交里新建文章并删除草稿，几分钟后上线，地址是 `#article/<分类>-<链接名>`。
 4. 点「删除草稿」：直接删掉这篇草稿。
 
@@ -57,7 +57,7 @@ node scripts/push-draft.mjs "/workspace/bilibili-transcripts/xxx.md"   # 通过�
 node scripts/push-draft.mjs --dry-run "xxx.md"                           # 只预览不推送
 ```
 
-脚本只写 `drafts/` 目录。
+脚本只写 `drafts/` 目录。文件名固定为短 ASCII：`BV….md` 或 `YT-….md`（从笔记里的视频 id 推导），中文标题留在正文里。封面放在 `public/media/covers/<id>.png`。
 
 ## 可选
 

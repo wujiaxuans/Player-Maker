@@ -37,7 +37,52 @@ export function github(env, fetchImpl = fetch) {
 
 export const json = (data, status = 200) => new Response(JSON.stringify(data), { status, headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' } });
 
+/** ASCII-only draft filenames so `#` / Unicode never hit URL path or fragment parsing. */
+export const DRAFT_NAME_RE = /^[A-Za-z0-9][A-Za-z0-9._-]{0,180}\.md$/;
+
+export function decodeDraftName(raw) {
+  let n = typeof raw === 'string' ? raw : '';
+  try { n = decodeURIComponent(n); } catch { /* keep raw */ }
+  return n;
+}
+
 export function draftPath(name) {
-  if (typeof name !== 'string' || !name.endsWith('.md') || name.includes('/') || name.includes('\\') || name.startsWith('.') || name.length > 200) throw Object.assign(new Error('草稿名无效'), { status: 400 });
-  return `drafts/${name}`;
+  const n = decodeDraftName(name);
+  if (!DRAFT_NAME_RE.test(n)) throw Object.assign(new Error('草稿名无效'), { status: 400 });
+  return `drafts/${n}`;
+}
+
+/** Derive drafts/<id>.md from note text / basename (BV… or YT-…). */
+export function draftFileName(text, basename = '') {
+  const src = String(text || '');
+  const base = String(basename || '');
+  const bv = src.match(/\b(BV[0-9A-Za-z]+)\b/) || base.match(/^(BV[0-9A-Za-z]+)/);
+  if (bv) return `${bv[1]}.md`;
+  const ytUrl = src.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([-\w]{6,})/i);
+  if (ytUrl) return `YT-${ytUrl[1].replace(/^-/, '')}.md`;
+  // Basename like YT--fdN68uCnA-Title.md → YT--fdN68uCnA.md (stop before -Title)
+  const ytBase = base.match(/^(YT-+[A-Za-z0-9_]+)/i);
+  if (ytBase) return `${ytBase[1]}.md`;
+  const safe = base.replace(/\.md$/i, '').replace(/[^A-Za-z0-9._-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 180);
+  if (!safe || !/^[A-Za-z0-9]/.test(safe)) throw new Error('无法从笔记生成安全的草稿文件名（需要 BV 或 YouTube id）');
+  return `${safe}.md`;
+}
+
+/** Human title from note body / front matter (for list UI). */
+export function titleFromNote(text) {
+  const src = String(text || '');
+  const fence = src.match(/^---\n([\s\S]*?)\n---/);
+  if (fence) {
+    const line = fence[1].split('\n').find(l => /^title:\s*/.test(l));
+    if (line) {
+      let v = line.replace(/^title:\s*/, '').trim();
+      try { v = JSON.parse(v); } catch { /* keep raw */ }
+      if (v) return String(v).replace(/^["']|["']$/g, '');
+    }
+  }
+  const h1 = src.match(/^#\s+(.+)$/m);
+  if (h1) return h1[1].trim();
+  const labeled = src.match(/^标题\s*[：:]\s*(.+)$/m);
+  if (labeled) return labeled[1].trim();
+  return '';
 }

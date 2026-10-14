@@ -3,7 +3,7 @@ import { generateKeyPairSync, createSign } from 'node:crypto';
 import { markdownToBlocks, postFromMarkdown, parseFrontMatter } from '../src/markdown.js';
 import { verifyAccessJwt, authenticate } from '../functions/_lib/auth.js';
 import { buildPost } from '../functions/api/publish.js';
-import { draftPath } from '../functions/_lib/github.js';
+import { draftPath, draftFileName, titleFromNote, DRAFT_NAME_RE } from '../functions/_lib/github.js';
 import { onRequestPost } from '../functions/api/publish.js';
 import { onRequest as middleware } from '../functions/api/_middleware.js';
 
@@ -16,17 +16,47 @@ await t('markdown blocks', () => {
 
 await t('publish builds credited post', () => {
   const draft = '---\ntitle: "视频"\nsource: "https://www.bilibili.com/video/BV1"\nauthor: "某UP"\n---\n\n# 视频\n\n## 一句话\n内容';
-  const out = buildPost(draft, { title: '新标题', tags: ['a'] }, '2026-10-14');
+  const out = buildPost(draft, { title: '新标题', tags: ['a'], cover: '/media/covers/BV1.png' }, '2026-10-14');
   const p = postFromMarkdown(out, 'x');
   assert.equal(p.title, '新标题'); assert.equal(p.source, 'https://www.bilibili.com/video/BV1'); assert.deepEqual(p.tags, ['a']);
+  assert.equal(p.cover, '/media/covers/BV1.png');
   assert.match(p.body[0], /原视频：\[视频\]\(https:\/\/www\.bilibili\.com\/video\/BV1\)，UP主：某UP/);
   assert.deepEqual(p.body[1], { h: '一句话' });
   assert.throws(() => buildPost('# no meta', {}), /source/);
 });
 
-await t('draft path validation', () => {
-  assert.equal(draftPath('BV1-中文.md'), 'drafts/BV1-中文.md');
-  for (const bad of ['../x.md', 'a/b.md', 'x.txt', '.hidden.md', undefined]) assert.throws(() => draftPath(bad));
+await t('draft path only allows safe ASCII names', () => {
+  assert.equal(draftPath('BV1mbDSB5EGx.md'), 'drafts/BV1mbDSB5EGx.md');
+  assert.equal(draftPath('YT--fdN68uCnA.md'), 'drafts/YT--fdN68uCnA.md');
+  assert.equal(draftPath(encodeURIComponent('BV18EL369EoC.md')), 'drafts/BV18EL369EoC.md');
+  assert.ok(DRAFT_NAME_RE.test('BV1.md'));
+  // # in the name must be rejected (would be stripped as URL fragment)
+  for (const bad of [
+    '../x.md', 'a/b.md', 'x.txt', '.hidden.md', undefined,
+    'BV1-中文.md', '提灯#40.md', 'game【提灯#40】.md',
+    'a'.repeat(200) + '.md',
+  ]) assert.throws(() => draftPath(bad), /草稿名无效|Cannot/);
+});
+
+await t('draftFileName derives BV/YT short ids', () => {
+  assert.equal(draftFileName('source: https://www.bilibili.com/video/BV1mbDSB5EGx\n', 'long-中文.md'), 'BV1mbDSB5EGx.md');
+  assert.equal(draftFileName('https://www.youtube.com/watch?v=--fdN68uCnA', 'note.md'), 'YT--fdN68uCnA.md');
+  assert.equal(draftFileName('', 'YT--fdN68uCnA-MonsterTrain2.md'), 'YT--fdN68uCnA.md');
+  assert.equal(draftFileName('', 'BV18EL369EoC-撤离玩法.md'), 'BV18EL369EoC.md');
+});
+
+await t('titleFromNote reads heading / front matter', () => {
+  assert.equal(titleFromNote('---\ntitle: "你好"\n---\n\n# 别的'), '你好');
+  assert.equal(titleFromNote('# 撤离玩法设计迭代观察【游戏提灯#40】\n\n正文'), '撤离玩法设计迭代观察【游戏提灯#40】');
+});
+
+await t('API paths never contain raw #', () => {
+  for (const name of ['BV1mbDSB5EGx.md', 'BV18EL369EoC.md', 'BV1yK411A7pN.md', 'YT--fdN68uCnA.md']) {
+    assert.ok(DRAFT_NAME_RE.test(name), name);
+    const path = `/api/drafts/${encodeURIComponent(name)}`;
+    assert.ok(!path.includes('#'), path);
+    assert.equal(draftPath(name), `drafts/${name}`);
+  }
 });
 
 // JWT
@@ -62,13 +92,13 @@ await t('publish endpoint does one atomic commit (mock GitHub)', async () => {
     if (m === 'GET' && path.startsWith('/contents/drafts/')) return r({ content: draft, sha: 's' });
     if (path.startsWith('/git/ref/')) return r({ object: { sha: 'head' } });
     if (path.startsWith('/git/commits/')) return r({ tree: { sha: 'tree0' } });
-    if (path === '/git/trees') { const b = JSON.parse(init.body); assert.equal(b.tree.length, 2); assert.equal(b.tree[1].sha, null); assert.equal(b.tree[0].path, 'content/posts/methods/my-note.md'); assert.match(b.tree[0].content, /UP主：U/); return r({ sha: 'tree1' }); }
+    if (path === '/git/trees') { const b = JSON.parse(init.body); assert.equal(b.tree.length, 2); assert.equal(b.tree[1].sha, null); assert.equal(b.tree[0].path, 'content/posts/methods/my-note.md'); assert.match(b.tree[0].content, /UP主：U/); assert.match(b.tree[0].content, /cover/); return r({ sha: 'tree1' }); }
     if (path === '/git/commits') return r({ sha: 'c1' });
     if (m === 'PATCH') { assert.equal(JSON.parse(init.body).sha, 'c1'); return r({}); }
     throw new Error('unexpected ' + m + path);
   };
   try {
-    const request = new Request('https://x/api/publish', { method: 'POST', body: JSON.stringify({ name: 'BV1-x.md', category: 'methods', slug: 'my-note', title: 'T', tags: [] }) });
+    const request = new Request('https://x/api/publish', { method: 'POST', body: JSON.stringify({ name: 'BV1mbDSB5EGx.md', category: 'methods', slug: 'my-note', title: 'T', tags: [], cover: '/media/covers/BV1mbDSB5EGx.png' }) });
     const res = await onRequestPost({ env: { GITHUB_TOKEN: 'tok', GITHUB_REPO: 'o/r', GITHUB_BRANCH: 'main' }, request, data: { email: 'me' } });
     assert.equal(res.status, 200, await res.clone().text());
     assert.equal(calls.filter(c => c.startsWith('PATCH')).length, 1);

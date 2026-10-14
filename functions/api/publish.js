@@ -10,6 +10,7 @@ export function buildPost(draft, input, today = new Date().toISOString().slice(0
     title: input.title || data.title, en: input.en || '', type: input.type || '视频笔记', desc: input.desc || data.desc || '',
     tags: Array.isArray(input.tags) ? input.tags.slice(0, 10).map(String) : [], date: today,
     source: data.source, author: data.author, image: 'architecture',
+    cover: input.cover || data.cover || undefined,
   };
   return stringifyFrontMatter(fm, `${credit}\n\n${body.replace(/^\s*#\s+.*\n/, '')}`);
 }
