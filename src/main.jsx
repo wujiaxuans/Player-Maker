@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { sortPosts } from './sort';
 import { createRoot } from 'react-dom/client';
 import { categories } from './posts';
 import { Header, Hero, Archive, Contact } from './components';
 import { ArticlePage } from './reading';
 import './styles.css';
 
-const articles = categories.flatMap(category => category.items.map((item, index) => ({ ...item, id: `${category.id}-${item.slug || index + 1}`, category: category.cn, categoryId: category.id })));
+const articles = sortPosts(categories.flatMap(category => category.items.map((item, index) => ({ ...item, id: `${category.id}-${item.slug || index + 1}`, category: category.cn, categoryId: category.id }))));
 function App() {
   const [active, setActive] = useState('all');
   const [hash, setHash] = useState(location.hash);

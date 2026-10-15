@@ -62,7 +62,7 @@ export function postFromMarkdown(text, fallbackSlug) {
   return {
     slug: data.slug || fallbackSlug, title: data.title || fallbackSlug, en: data.en || '', type: data.type || '视频笔记',
     image: data.image || 'architecture', cover: data.cover || undefined, desc: data.desc || '', tags,
-    date: data.date || '', source: data.source || '', author: data.author || '',
+    date: data.date || '', updated: data.updated || '', source: data.source || '', author: data.author || '',
     order: data.order != null ? Number(data.order) || 0 : 0,
     body: markdownToBlocks(body),
   };

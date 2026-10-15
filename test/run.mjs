@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { generateKeyPairSync, createSign } from 'node:crypto';
+import { comparePosts, sortPosts } from '../src/sort.js';
 import { markdownToBlocks, postFromMarkdown, parseFrontMatter } from '../src/markdown.js';
 import { verifyAccessJwt, authenticate } from '../functions/_lib/auth.js';
 import { buildPost } from '../functions/api/publish.js';
@@ -17,6 +18,19 @@ await t('markdown blocks', () => {
   assert.deepEqual(b, [{ h: '00:00 开场' }, { ul: ['a b', 'c'] }, { ol: ['x', 'y'] }, 'paraline', { h3: 's' }, { h4: 'l' }, { img: '/a.png', alt: 'cap', caption: 'cap' }]);
   const titled = markdownToBlocks('1. **设计师想做什么**：先写目的。\n2. plain');
   assert.deepEqual(titled, [{ ol: [{ t: '设计师想做什么', d: '先写目的。' }, 'plain'] }]);
+});
+
+await t('posts sort newest first with tie-breakers', () => {
+  const posts = [
+    { title: 'b', date: '2026-10-14', order: 10 },
+    { title: 'a', date: '2026-10-14', order: 1 },
+    { title: 'new', date: '2026-10-15', order: 2 },
+    { title: 'upd', date: '2026-10-14', updated: '2026-10-16' },
+    { title: 'old', date: '2026-01-01', order: 1 },
+  ];
+  assert.deepEqual(sortPosts(posts).map(p => p.title), ['new', 'upd', 'a', 'b', 'old']);
+  assert.equal(comparePosts({ title: 'x', date: '2026-10-14' }, { title: 'y', date: '2026-10-14' }) < 0, true);
+  assert.equal(postFromMarkdown('---\ndate: "2026-10-14"\nupdated: "2026-10-15"\n---\nx', 's').updated, '2026-10-15');
 });
 
 await t('publish builds credited post with draft_id', () => {
