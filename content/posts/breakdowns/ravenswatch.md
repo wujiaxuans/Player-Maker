@@ -6,6 +6,7 @@ desc: "从开发者访谈和开发日志、整局循环，到地图选点、升�
 tags: ["鸦卫奇旅","动作肉鸽","合作"]
 date: "2026-10-15"
 image: "city"
+cover: "/media/posts/ravenswatch/cover.jpg"
 order: 2
 draft_id: "site-breakdowns-ravenswatch"
 source: "site://breakdowns/ravenswatch"
