@@ -1,3 +1,6 @@
+import { beijingDate, dailyCards, recentCards } from '../src/cardDiscovery.js';
+import { cardArtwork } from '../src/artworkParams.js';
+import { cardFiberParams } from '../src/cardFibers.js';
 import assert from 'node:assert/strict';
 import { generateKeyPairSync, createSign } from 'node:crypto';
 import { comparePosts, sortPosts } from '../src/sort.js';
@@ -358,6 +361,43 @@ await t('v3 card helpers', () => {
   const s = splitSource('书 https://example.com/x');
   assert.equal(s.links[0].host, 'example.com');
   assert.deepEqual(visibleRange({ scrollLeft: 0, clientWidth: 1200 }, 50), [1, 3]);
+});
+
+await t('card fiber identity survives order and reload with bounded parameters', () => {
+  const a = cardFiberParams('same-card');
+  for (let i = 0; i < 200; i++) {
+    const p = cardFiberParams(`card-${i}`);
+    assert.ok(p.layers === 1 && p.threads >= 30 && p.threads <= 42);
+    assert.ok(p.twist >= .45 && p.twist <= .8);
+    assert.equal(p.fiberStyle, 'lines');
+    assert.ok(p.volume <= .12);
+  }
+  assert.deepEqual(cardFiberParams('same-card'), a);
+  assert.notDeepEqual(cardFiberParams('different-card'), a);
+});
+await t('card artwork has stable, structurally diverse motifs', () => {
+  const designs = Array.from({ length: 124 }, (_, i) => cardArtwork(`card-${i}`));
+  assert.equal(new Set(designs.map(p => p.family)).size, 6);
+  assert.deepEqual(cardArtwork('fixed-card'), cardArtwork('fixed-card'));
+  assert.ok(designs.every(p => p.count >= 9 && p.count <= 13));
+});
+
+
+await t('daily discovery stays stable and respects Beijing day boundaries', () => {
+  const pool = Array.from({length:30}, (_,i) => ({slug:`card-${i}`,groups:[`group-${i%5}`]}));
+  assert.equal(beijingDate(new Date('2026-10-15T16:00:00Z')), '2026-10-16');
+  assert.equal(beijingDate(new Date('2026-10-15T15:59:59Z')), '2026-10-15');
+  assert.deepEqual(dailyCards(pool,'2026-10-16'), dailyCards([...pool].reverse(),'2026-10-16'));
+  const week = Array.from({length:7},(_,i)=>dailyCards(pool,`2026-10-${10+i}`)).flat();
+  assert.equal(new Set(week.map(c=>c.slug)).size,21);
+  assert.equal(dailyCards([], '2026-10-16').length,0);
+  assert.equal(dailyCards(pool.slice(0,2),'2026-10-16').length,2);
+});
+await t('recent cards include today and previous two dates only', () => {
+  const pool = ['2026-10-16','2026-10-15','2026-10-14','2026-10-13','2026-10-17',null,'bad'].map((addedAt,i)=>({slug:String(i),addedAt}));
+  assert.deepEqual(recentCards(pool,'2026-10-16').map(c=>c.slug),['0','1','2']);
+  assert.equal(parseCardsRoute('#cards/today').view,'today');
+  assert.equal(parseCardsRoute('#cards/recent').view,'recent');
 });
 
 console.log(`${n} test groups passed`);

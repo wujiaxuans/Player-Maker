@@ -33,7 +33,7 @@ function App() {
     });
     return () => cancelAnimationFrame(frame);
   }, [hash, articleRoute, cardRoute]);
-  if (cardsRoute) return <CardsPage key={cardsRoute.group || 'all'} group={cardsRoute.group} focus={cardsRoute.focus} />;
+  if (cardsRoute) return <CardsPage key={cardsRoute.view || cardsRoute.group || 'all'} view={cardsRoute.view} group={cardsRoute.group} focus={cardsRoute.focus} />;
   if (articleRoute) return <ArticlePage item={article} returnHref={readingOrigin.current.hash} />;
   return <>
     <a className="skip-link" href={archiveView ? '#archive' : '#work'}>跳至文章内容</a>

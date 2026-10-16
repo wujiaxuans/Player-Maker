@@ -4,6 +4,7 @@ import { GROUPS } from './cardFilter.js';
 export function parseCardsRoute(hash) {
   const h = String(hash || '');
   if (h === '#cards' || h === '#cards/') return { group: null, focus: null };
+  if (h === '#cards/today' || h === '#cards/recent') return { group: null, focus: null, view: h.slice(7) };
   if (h.startsWith('#cards/')) {
     const group = safeDecode(h.slice(7));
     return { group: GROUPS.includes(group) ? group : null, focus: null };

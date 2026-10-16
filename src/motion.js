@@ -49,7 +49,7 @@ export function useSectionMotion(scope, variant, active) {
       if (reduce) return;
       const root = scope.current;
       const q = gsap.utils.selector(root);
-      const key = root.id === 'contact' ? 'footer' : 'articles';
+      const key = root.id === 'contact' ? 'footer' : root.id === 'card-entry' ? 'cards-entry' : 'articles';
       if (played.has(key)) return;
       const timeline = gsap.timeline({
         defaults: { ease: 'power4.out' },
@@ -73,6 +73,26 @@ export function useSectionMotion(scope, variant, active) {
             y: 30, clipPath: 'inset(100% 0 0 0)', duration: .9,
             clearProps: 'transform,clipPath'
           }, 1.1);
+      } else if (key === 'cards-entry') {
+        timeline.from(q('.dc-heading'), {
+          y: 36, clipPath: 'inset(100% 0 0 0)', duration: 1.1,
+          clearProps: 'transform,clipPath'
+        }, .65)
+          .from(q('.dc-discovery'), { y: 55, clipPath: 'inset(0 0 100% 0)', duration: 1.5, clearProps: 'transform,clipPath' }, .85)
+          // A single ordered stagger keeps the lower rows behind the first row.
+          .from(q('.dc-tile'), {
+            y: 90, scaleY: .86, clipPath: 'inset(0 0 100% 0)',
+            transformOrigin: 'center bottom', duration: 1.4, stagger: .09,
+            clearProps: 'transform,transformOrigin,clipPath'
+          }, .9)
+          .from(q('.dc-symbol'), {
+            scale: .65, rotation: -24, transformOrigin: 'center',
+            duration: 1.5, stagger: .09, clearProps: 'transform,transformOrigin'
+          }, 1.05)
+          .from(q('.dc-home-foot'), {
+            y: 25, clipPath: 'inset(100% 0 0 0)', duration: 1,
+            clearProps: 'transform,clipPath'
+          }, 1.8);
       } else {
         timeline.from(q('.work-heading'), {
           y: 40, clipPath: 'inset(100% 0 0 0)', duration: 1.05,

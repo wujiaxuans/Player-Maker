@@ -29,15 +29,31 @@ export function Header({ archiveView, onSelect }) {
 export function Hero({ openingActive }) {
   const root = useRef(null);
   useOpening(root, openingActive);
+  useEffect(() => {
+    const hero = root.current;
+    let visible = false;
+    const sync = () => hero.classList.toggle('mist-running', visible && !document.hidden);
+    const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); });
+    observer.observe(hero);
+    document.addEventListener('visibilitychange', sync);
+    return () => { observer.disconnect(); document.removeEventListener('visibilitychange', sync); hero.classList.remove('mist-running'); };
+  }, []);
   return <section ref={root} id="home" className="hero" aria-labelledby="hero-title">
-    <div className="opening" aria-hidden="true"><div className="opening-panel" /><div className="opening-panel" /><div className="opening-mark"><div className="opening-label"><span>PLAYER /</span><span>MAKER</span></div><div className="opening-rule" /></div></div><div className="hero-media" aria-hidden="true"><img className="hero-poster" src="/media/hero-mist-v1.png" alt="" fetchPriority="high" /></div>
+    <div className="opening" aria-hidden="true"><div className="opening-panel" /><div className="opening-panel" /><div className="opening-mark"><div className="opening-label"><span>PLAYER /</span><span>MAKER</span></div><div className="opening-rule" /></div></div><div className="hero-media" aria-hidden="true"><img className="hero-poster" src="/media/hero-mist-v1.png" alt="" fetchPriority="high" /><div className="hero-mist hero-mist-far" /><div className="hero-mist hero-mist-near" /></div>
     <div className="hero-shade" aria-hidden="true" />
     <div className="hero-content container"><span className="hero-kicker">PLAY. THINK. MAKE.</span><h1 id="hero-title" aria-label="PLAYER. MAKER."><span className="hero-word-mask" aria-hidden="true"><span className="hero-word">PLAYER.</span></span><span className="hero-word-mask" aria-hidden="true"><span className="hero-word">MAKER.</span></span></h1><p className="hero-description">让想象，成为可游玩的世界。</p></div>
     <div className="hero-margin-note" aria-hidden="true">游戏 · 设计 · 灵感</div>
   </section>;
 }
 function ArticleCard({ item, onRead }) {
-  return <a className="project-card" href={`#article/${item.id}`} onClick={onRead} aria-label={`阅读：${item.title}`}>
+  const onMove = event => {
+    if (event.pointerType === 'touch') return;
+    const card = event.currentTarget;
+    const rect = card.getBoundingClientRect();
+    card.style.setProperty('--mx', `${event.clientX - rect.left}px`);
+    card.style.setProperty('--my', `${event.clientY - rect.top}px`);
+  };
+  return <a onPointerMove={onMove} className="project-card" href={`#article/${item.id}`} onClick={onRead} aria-label={`阅读：${item.title}`}>
     <div className="card-image"><div className="card-image-reveal"><img src={item.cover || `/media/${item.image}.jpg`} alt="" loading="lazy" /></div><div className="image-curtain" aria-hidden="true" /><span className="image-type">{item.category}</span><Arrow /></div>
     <div className="card-body"><div className="card-meta">{item.tags.join(' / ')}</div><h3>{item.title}</h3><p>{item.desc}</p><div className="card-footer"><span>{item.type}</span><span>阅读笔记 ↗</span></div></div>
   </a>;
