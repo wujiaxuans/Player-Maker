@@ -11,6 +11,10 @@ import { onRequestGet as listPosts } from '../functions/api/posts/index.js';
 import { onRequestGet as getPost, onRequestPut as putPost } from '../functions/api/posts/[category]/[slug].js';
 import { onRequestPost as unpublish, toDraftContent } from '../functions/api/unpublish.js';
 
+import { paginate, pageCount, PAGE_SIZE } from '../src/paginate.js';
+import { filterCards, groupCounts, tagVocabulary, GROUPS } from '../src/cardFilter.js';
+import { parseCard, parseGrouping } from '../src/cardParse.js';
+import { readFileSync } from 'node:fs';
 let n = 0; const t = async (name, fn) => { await fn(); n++; console.log('ok', name); };
 
 await t('markdown blocks', () => {
@@ -271,6 +275,51 @@ await t('unpublish one-commit move back to drafts', async () => {
     });
     assert.equal(badCat.status, 400);
   } finally { mock.restore(); }
+});
+
+await t('pagination: 6 per page, clamps out-of-range pages', () => {
+  const items = Array.from({ length: 14 }, (_, i) => i + 1);
+  assert.equal(PAGE_SIZE, 6);
+  assert.equal(pageCount(14), 3); assert.equal(pageCount(0), 1); assert.equal(pageCount(6), 1);
+  assert.deepEqual(paginate(items, 1).items, [1, 2, 3, 4, 5, 6]);
+  assert.deepEqual(paginate(items, 3).items, [13, 14]);
+  assert.equal(paginate(items, 9).page, 3); assert.equal(paginate(items, 0).page, 1);
+  assert.deepEqual(paginate([], 1), { page: 1, pages: 1, items: [] });
+  const sorted = sortPosts([{ title: 'a', date: '2026-01-01' }, { title: 'b', date: '2026-02-01' }]);
+  assert.equal(paginate(sorted, 1).items[0].title, 'b');
+});
+
+await t('card filtering by group and tag dimensions', () => {
+  const cards = [
+    { slug: 'a', groups: ['取舍与策略'], tags: { 体验: ['取舍'], 机制: ['经济'], 品类: ['DBG'] } },
+    { slug: 'b', groups: ['取舍与策略', '风险与刺激'], tags: { 体验: ['紧张'], 机制: ['经济', '撤离'], 品类: ['搜打撤'] } },
+    { slug: 'c', groups: ['设计方法与工具'], tags: { 体验: [], 机制: ['平衡'], 品类: ['DBG'] } },
+  ];
+  const ids = o => filterCards(cards, o).map(c => c.slug);
+  assert.deepEqual(ids({}), ['a', 'b', 'c']);
+  assert.deepEqual(ids({ group: '风险与刺激' }), ['b']);
+  assert.deepEqual(ids({ tags: { 机制: ['经济'] } }), ['a', 'b']);
+  assert.deepEqual(ids({ tags: { 体验: ['取舍', '紧张'] } }), ['a', 'b'], 'OR within a dimension');
+  assert.deepEqual(ids({ tags: { 机制: ['经济'], 品类: ['DBG'] } }), ['a'], 'AND across dimensions');
+  assert.deepEqual(ids({ group: '取舍与策略', tags: { 品类: ['DBG'] } }), ['a']);
+  const counts = groupCounts(cards);
+  assert.equal(counts['取舍与策略'], 2); assert.equal(counts['设计方法与工具'], 1); assert.equal(Object.keys(counts).length, GROUPS.length);
+  assert.deepEqual(tagVocabulary(cards).机制, ['经济', '撤离', '平衡']);
+});
+
+await t('card parsing and synced card data', () => {
+  const c = parseCard('# 标题\n**来源类型：用户见解**\n- 解决的问题：P\n- M：m\n- 前提：x\n- 关联：A-甲（备注，含逗号）、B-乙\n- 其他：y', 'X-标题');
+  assert.equal(c.title, '标题'); assert.equal(c.insight, true); assert.equal(c.problem, 'P'); assert.equal(c.m, 'm'); assert.equal(c.premise, 'x');
+  assert.deepEqual(c.related, ['A-甲（备注，含逗号）', 'B-乙']); assert.deepEqual(c.extra, ['其他：y']);
+  const g = parseGrouping('## 取舍与策略（1）\n| 卡片 | 同时属于 | 体验 | 机制 | 品类 |\n|---|---|---|---|---|\n| X-a | 风险与刺激 | 取舍、紧张 | 经济 | DBG |\n## 风险与刺激（1）\n| X-a | 取舍与策略 | 取舍、紧张 | 经济 | DBG |\n');
+  assert.deepEqual(g.get('X-a'), { groups: ['取舍与策略', '风险与刺激'], tags: { 体验: ['取舍', '紧张'], 机制: ['经济'], 品类: ['DBG'] } });
+  const data = JSON.parse(readFileSync(new URL('../content/cards/cards.json', import.meta.url)));
+  assert.ok(data.length > 0);
+  for (const card of data) {
+    assert.ok(card.groups.length >= 1 && card.groups.length <= 2, card.slug);
+    assert.ok(card.groups.every(x => GROUPS.includes(x)), card.slug);
+    assert.ok(card.problem, card.slug);
+  }
 });
 
 console.log(`${n} test groups passed`);

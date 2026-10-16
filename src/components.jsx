@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useOpening, useSectionMotion } from './motion';
+import { paginate } from './paginate';
 
 function Arrow({ down = false }) {
   return <svg className="arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d={down ? 'M12 4v16m-6-6 6 6 6-6' : 'M5 19 19 5M5 5h14v14'} stroke="currentColor" strokeWidth="1.4" /></svg>;
@@ -18,6 +19,7 @@ export function Header({ archiveView, onSelect }) {
     <div className="brand"><Wordmark /><span className="brand-caption">关于游戏，关于设计。<small>A PERSONAL JOURNAL</small></span></div>
     <nav id="main-nav" className={`nav ${open ? 'open' : ''}`} aria-label="主导航">
       <a href="#work" aria-current={!archiveView ? 'page' : undefined} onClick={() => setOpen(false)}>文章</a>
+      <a href="#cards" onClick={() => setOpen(false)}>卡片</a>
       <a href="#archive" aria-current={archiveView ? 'page' : undefined} onClick={() => { onSelect('all'); setOpen(false); }}>归档</a>
       <a href="#contact" onClick={() => setOpen(false)}>联系 <Arrow /></a>
     </nav>
@@ -40,12 +42,23 @@ function ArticleCard({ item, onRead }) {
     <div className="card-body"><div className="card-meta">{item.tags.join(' / ')}</div><h3>{item.title}</h3><p>{item.desc}</p><div className="card-footer"><span>{item.type}</span><span>阅读笔记 ↗</span></div></div>
   </a>;
 }
+export function Pager({ page, pages, onPage }) {
+  return <nav className="pager" aria-label="文章分页">
+    <button type="button" disabled={page <= 1} onClick={() => onPage(page - 1)}>← 上一页</button>
+    {Array.from({ length: pages }, (_, i) => i + 1).map(p => <button key={p} type="button" aria-current={p === page ? 'page' : undefined} aria-label={`第 ${p} 页`} onClick={() => onPage(p)}>{p}</button>)}
+    <button type="button" disabled={page >= pages} onClick={() => onPage(page + 1)}>下一页 →</button>
+  </nav>;
+}
 export function Archive({ categories, articles, active, onSelect, archiveView, onRead }) {
   const root = useRef(null);
   useSectionMotion(root, archiveView, active);
   const filters = [{ id: 'all', cn: '全部' }, ...categories];
   const filtered = active === 'all' ? articles : articles.filter(item => item.categoryId === active);
-  const shown = archiveView ? filtered : filtered.slice(0, 6);
+  const [page, setPage] = useState(1);
+  useEffect(() => { setPage(1); }, [active]);
+  const paged = paginate(filtered, page);
+  const shown = archiveView ? filtered : paged.items;
+  const goPage = next => { setPage(next); root.current?.querySelector('.filter-bar')?.scrollIntoView({ behavior: 'instant', block: 'start' }); };
   function navigateTab(event, index) {
     const next = { ArrowRight: (index + 1) % filters.length, ArrowLeft: (index + filters.length - 1) % filters.length, Home: 0, End: filters.length - 1 }[event.key];
     if (next !== undefined) { event.preventDefault(); onSelect(filters[next].id); document.getElementById(`tab-${filters[next].id}`).focus(); }
@@ -56,6 +69,7 @@ export function Archive({ categories, articles, active, onSelect, archiveView, o
     <div role="tabpanel" id="article-panel" aria-labelledby={`tab-${active}`} tabIndex={0}>
       {archiveView ? <div className="archive-list">{shown.map((item, index) => <a key={item.id} href={`#article/${item.id}`} onClick={onRead} className="archive-item"><span className="archive-index">{String(index + 1).padStart(2, '0')}</span><div><span className="card-meta">{item.category} / {item.type}</span><h3>{item.title}</h3></div><Arrow /></a>)}</div> : <div className="card-grid">{shown.map(item => <ArticleCard key={item.id} item={item} onRead={onRead} />)}</div>}
     </div>
+    {!archiveView && paged.pages > 1 && <Pager page={paged.page} pages={paged.pages} onPage={goPage} />}
     <div className="archive-footer"><span>好设计，从一个好问题开始。</span><a href={archiveView ? '#work' : '#archive'} onClick={() => onSelect('all')}>{archiveView ? '返回文章首页' : `查看全部 ${articles.length} 篇文章`} <Arrow /></a></div>
   </div></section>;
 }
