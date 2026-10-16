@@ -32,7 +32,7 @@ export function wheelTarget({ deltaX, deltaY }, track, inner) {
 }
 
 // Bounce-style neighbour push: hovered card scales up, others shift away from it.
-export function bounceOffset(index, hovered, push = 28) {
+export function bounceOffset(index, hovered, push = 12) {
   if (hovered < 0 || index === hovered) return 0;
   return Math.sign(index - hovered) * push;
 }

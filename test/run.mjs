@@ -12,7 +12,7 @@ import { onRequestGet as getPost, onRequestPut as putPost } from '../functions/a
 import { onRequestPost as unpublish, toDraftContent } from '../functions/api/unpublish.js';
 
 import { paginate, pageCount, PAGE_SIZE } from '../src/paginate.js';
-import { filterCards, groupCounts, tagVocabulary, GROUPS } from '../src/cardFilter.js';
+import { filterCards, groupCounts, tagVocabulary, GROUPS, GROUP_DESC, ALL_DESC, tagCounts, splitSource, visibleRange } from '../src/cardFilter.js';
 import { parseCard, parseGrouping } from '../src/cardParse.js';
 import { parseCardsRoute, cardsHref, cardHref, wheelTarget, bounceOffset } from '../src/cardRoute.js';
 import { readFileSync } from 'node:fs';
@@ -348,6 +348,16 @@ await t('wheel goes to card back first, then track, then page', () => {
 await t('bounce offset pushes neighbours away from hovered card', () => {
   assert.deepEqual([0, 1, 2, 3].map(i => bounceOffset(i, 1, 20)), [-20, 0, 20, 20]);
   assert.deepEqual([0, 1].map(i => bounceOffset(i, -1)), [0, 0]);
+});
+
+await t('v3 card helpers', () => {
+  for (const g of GROUPS) assert.ok(GROUP_DESC[g] && GROUP_DESC[g].length <= 40, g);
+  assert.equal(ALL_DESC(124), '124 张，按玩家体验分组');
+  const cs = [{ tags: { genre: ['A'] } }, { tags: { genre: ['B'] } }, { tags: { genre: ['B'] } }];
+  assert.deepEqual(tagCounts(cs, 'genre', ['A', 'B']).map(x => x.tag), ['B', 'A']);
+  const s = splitSource('书 https://example.com/x');
+  assert.equal(s.links[0].host, 'example.com');
+  assert.deepEqual(visibleRange({ scrollLeft: 0, clientWidth: 1200 }, 50), [1, 3]);
 });
 
 console.log(`${n} test groups passed`);
