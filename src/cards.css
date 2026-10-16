@@ -349,3 +349,10 @@
 .dc-discovery .recent-list button>span{font-size:17px;line-height:1.65}.dc-discovery .recent-list small{font-size:11px;margin-top:9px}.dc-discovery .recent-list b{font-size:19px;padding:8px}
 .dc-discovery .recent-all{margin:0;padding-top:17px;min-height:60px;align-items:center}
 @media(max-width:1450px){.dc-discovery{gap:38px;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.daily-feature.daily-feature-home{padding-right:0;min-height:590px}.daily-feature-home .daily-stack-wrap{width:300px;height:390px}.dc-discovery .recent-list button{gap:15px}.dc-discovery .recent-list button>span{font-size:15px}.daily-drag-hint{font-size:10px}}
+
+/* Edge fades over the deck; the active (hovered/centre) card rises above them. */
+.dc-deck .bounce-cards::before,.dc-deck .bounce-cards::after{content:'';position:absolute;top:0;bottom:0;width:15%;z-index:40;pointer-events:none}
+.dc-deck .bounce-cards::before{left:0;background:linear-gradient(90deg,#101512,#10151200)}
+.dc-deck .bounce-cards::after{right:0;background:linear-gradient(270deg,#101512,#10151200)}
+.dc-deck .bounce-cards__card[data-active]{z-index:50!important}
+.dc-deck .has-expanded::before,.dc-deck .has-expanded::after{opacity:.6}
