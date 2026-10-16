@@ -158,6 +158,9 @@ export default function BounceCards({
             targetY = slot.y - s.cardSize * 0.04;
             targetRotate = 0;
             targetScale = s.hoverScale;
+            // Keep the hovered card inside the deck so the clipped stage never cuts it.
+            const half = (root.clientWidth - el.offsetWidth * s.hoverScale) / 2 - 12;
+            if (half > 0) targetX = Math.max(-half, Math.min(half, targetX));
           } else {
             targetX = slot.x + Math.sign(i - hovered) * s.pushDistance;
           }
