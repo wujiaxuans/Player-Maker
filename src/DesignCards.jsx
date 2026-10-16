@@ -150,7 +150,7 @@ function FilterPop({ dim, pool, vocab, selected, onToggle, onClearDim, onClose, 
   const opts = tagCounts(pool, dim, vocab);
   return <div ref={ref} className="dc-pop" role="dialog" aria-label={`${dim}筛选`} style={{ left }}>
     <h5><span>{dim} · 同维度内为“或”，跨维度为“且”</span><span>数字 = 当前分组内张数</span></h5>
-    <div className="opts">{opts.map(({ tag, n }) => <button key={tag} type="button" className="opt" aria-pressed={selected.includes(tag)} disabled={!n && !selected.includes(tag)} onClick={() => onToggle(tag)}>{tag}<b className="num">{n}</b></button>)}</div>
+    <div className="opts">{opts.map(({ tag, n }) => <button key={tag} type="button" className="opt" aria-pressed={selected.includes(tag)} disabled={!n && !selected.includes(tag)} onMouseDown={e => e.preventDefault()} onClick={() => onToggle(tag)}>{tag}<b className="num">{n}</b></button>)}</div>
     <div className="pop-foot"><span>已选 {selected.length} · 显示 <strong>{shownCount}</strong> 张</span><span><button type="button" className="dc-clear" onClick={onClearDim}>清除本维度</button><button type="button" className="done" onClick={onClose}>完成</button></span></div>
   </div>;
 }
@@ -185,10 +185,21 @@ export function CardsPage({ group, focus, view }) {
     const next = shown[Math.max(0, Math.min(total - 1, i))];
     if (next) { setPosition(Math.max(minPosition, Math.min(maxPosition, i))); setFlipped(null); }
   };
-  const toggleTag = (dim, t) => {
-    setTags(cur => ({ ...cur, [dim]: cur[dim].includes(t) ? cur[dim].filter(x => x !== t) : [...cur[dim], t] }));
-    setPosition(0); setFlipped(null);
+  const keepScroll = fn => {
+    const y = window.scrollY;
+    fn();
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: y, left: 0, behavior: 'instant' });
+      requestAnimationFrame(() => window.scrollTo({ top: y, left: 0, behavior: 'instant' }));
+    });
   };
+  const toggleTag = (dim, t) => {
+    keepScroll(() => {
+      setTags(cur => ({ ...cur, [dim]: cur[dim].includes(t) ? cur[dim].filter(x => x !== t) : [...cur[dim], t] }));
+      setPosition(0); setFlipped(null);
+    });
+  };
+  const toggleDim = dim => keepScroll(() => setOpenDim(cur => cur === dim ? null : dim));
   useEffect(() => {
     const previous = document.title;
     document.title = `${view === 'today' ? '今日推荐' : view === 'recent' ? '最近新增' : group || '全部设计卡片'} — PLAYER / MAKER`;
@@ -228,10 +239,10 @@ export function CardsPage({ group, focus, view }) {
         <nav className="dc-gtabs" aria-label="体验分组">
           {[null, ...GROUPS].map((g, i) => <a key={g || 'all'} href={cardsHref(g)} aria-current={!view && (group || null) === g ? 'page' : undefined} style={{ '--category-color': g ? GROUP_COLORS[i - 1] : '#d5f36b' }}><span className="dc-category-dot" /><span>{g || '全部卡片'}</span><sup className="num">{g ? counts[g] : cards.length}</sup></a>)}
         </nav>
-        {view !== 'today' && <div className="dc-sidebar-filters"><div className="dc-filter-heading"><span>进一步筛选</span>{anyTag && <button type="button" className="dc-clear" onClick={() => { setTags(EMPTY_TAGS); setPosition(0); setFlipped(null); }}>清除全部</button>}</div>
+        {view !== 'today' && <div className="dc-sidebar-filters"><div className="dc-filter-heading"><span>进一步筛选</span>{anyTag && <button type="button" className="dc-clear" onClick={() => keepScroll(() => { setTags(EMPTY_TAGS); setPosition(0); setFlipped(null); })}>清除全部</button>}</div>
           {TAG_DIMS.map(dim => <div className="dc-filter-section" key={dim}>
-            <button type="button" className="dc-fbtn" aria-expanded={openDim === dim} onClick={() => setOpenDim(openDim === dim ? null : dim)}><span>{dim}</span>{tags[dim].length > 0 && <span className="n num">{tags[dim].length}</span>}<span className="car" aria-hidden="true">{openDim === dim ? '−' : '+'}</span></button>
-            {openDim === dim && <FilterPop dim={dim} left={0} pool={pool} vocab={vocab[dim]} selected={tags[dim]} onToggle={t => toggleTag(dim, t)} onClearDim={() => { setTags(cur => ({ ...cur, [dim]: [] })); setPosition(0); setFlipped(null); }} onClose={() => setOpenDim(null)} shownCount={total} />}
+            <button type="button" className="dc-fbtn" aria-expanded={openDim === dim} onClick={() => toggleDim(dim)}><span>{dim}</span>{tags[dim].length > 0 && <span className="n num">{tags[dim].length}</span>}<span className="car" aria-hidden="true">{openDim === dim ? '−' : '+'}</span></button>
+            {openDim === dim && <FilterPop dim={dim} left={0} pool={pool} vocab={vocab[dim]} selected={tags[dim]} onToggle={t => toggleTag(dim, t)} onClearDim={() => keepScroll(() => { setTags(cur => ({ ...cur, [dim]: [] })); setPosition(0); setFlipped(null); })} onClose={() => setOpenDim(null)} shownCount={total} />}
           </div>)}
           {anyTag && <div className="dc-selected-tags">{TAG_DIMS.flatMap(dim => tags[dim].map(t => <span key={dim + t} className="chip">{t}<button type="button" className="x" aria-label={`移除 ${t}`} onClick={() => toggleTag(dim, t)}>×</button></span>))}</div>}
         </div>}

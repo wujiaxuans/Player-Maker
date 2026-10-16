@@ -242,6 +242,40 @@
 .dc-bounce-content .unflip{color:var(--accent);border-color:#d5f36b66}
 .dc-bounce-content .bsec.cost h4{color:var(--cost)}
 
+
+/* Short viewports only: keep the scrubber in view without changing 2K spacing. */
+@media (max-height: 1000px) and (min-width: 701px) {
+  .dc-page.reading-page{height:100svh;max-height:100svh;overflow:hidden}
+  .dc-page>.reading-nav{height:72px}
+  .dc-page-main{height:calc(100svh - 72px);min-height:0!important;align-items:stretch}
+  .dc-sidebar{min-height:0!important;height:100%;max-height:100%;overflow-y:auto;overscroll-behavior:contain;padding:16px 18px 20px 0;scrollbar-width:thin}
+  .dc-sidebar-heading h2{margin:8px 0 4px;font-size:22px}
+  .dc-sidebar-heading p{margin:0 0 14px;line-height:1.55}
+  .dc-discovery-nav{margin:12px 0 10px;padding-bottom:12px;gap:2px}
+  .dc-discovery-nav>span{padding:0 10px 4px}
+  .dc-discovery-nav a{padding:8px 10px}
+  .dc-sidebar .dc-gtabs{gap:1px}
+  .dc-sidebar .dc-gtabs a{padding:7px 10px}
+  .dc-sidebar .dc-gtabs a[aria-current]:after{top:7px;bottom:7px}
+  .dc-sidebar-filters{margin-top:12px;padding-top:12px}
+  .dc-filter-heading{margin-bottom:6px}
+  .dc-filter-section>.dc-fbtn{height:36px}
+  .dc-sidebar .dc-pop{padding:10px 6px}
+  .dc-sidebar .dc-pop .opts{max-height:min(180px,28svh)}
+  .dc-selected-tags{margin-top:10px}
+  .dc-workspace{padding:16px 0 0 28px;height:100%;min-height:0;display:flex;flex-direction:column}
+  .dc-workspace .dc-toolbar{min-height:0;padding-bottom:10px}
+  .dc-page-title{margin:4px 0;font-size:clamp(22px,2vw,32px)}
+  .dc-phead p{line-height:1.5}
+  .dc-workspace .dc-deck-stage{flex:1;min-height:0;display:flex;flex-direction:column}
+  .dc-workspace .dc-deck{flex:1;min-height:0}
+  .dc-workspace .bounce-cards{height:clamp(420px,calc(100svh - 310px),580px)!important}
+  .dc-workspace .reading .bounce-cards{height:clamp(460px,calc(100svh - 290px),620px)!important}
+  .dc-slider-row{padding-bottom:6px;gap:14px}
+  .dc-workspace .dc-prog{padding-top:10px;padding-bottom:6px;gap:10px}
+  .dc-prog{padding-bottom:6px}
+}
+
 /* Continuous deck scrubber, with a generous pointer target. */
 .dc-slider-row{display:flex;align-items:center;gap:20px;padding:0 0 18px}
 .dc-slider-label{font-size:11px;letter-spacing:1px;color:var(--muted);white-space:nowrap}
