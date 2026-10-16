@@ -1,0 +1,8 @@
+/* Adapted from React Bits Flip Card (MIT + Commons Clause, David Haz). See FlipCard.jsx. */
+.flip-card{position:relative;flex:0 0 auto;width:var(--fc-w,320px);height:var(--fc-h,440px);border-radius:4px;cursor:pointer;outline:none;transform-origin:center center;transition:transform .32s cubic-bezier(.34,1.56,.64,1);perspective:1100px;touch-action:pan-x pan-y}
+.flip-card:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.flip-card__rotor{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.flip-card[data-flipped] .flip-card__rotor{transform:rotateY(180deg)}
+.flip-card__face{position:absolute;inset:0;overflow:hidden;border-radius:inherit;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.flip-card__face--back{transform:rotateY(180deg)}
+@media(prefers-reduced-motion:reduce){.flip-card,.flip-card__rotor{transition:none}}

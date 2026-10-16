@@ -14,6 +14,7 @@ import { onRequestPost as unpublish, toDraftContent } from '../functions/api/unp
 import { paginate, pageCount, PAGE_SIZE } from '../src/paginate.js';
 import { filterCards, groupCounts, tagVocabulary, GROUPS } from '../src/cardFilter.js';
 import { parseCard, parseGrouping } from '../src/cardParse.js';
+import { parseCardsRoute, cardsHref, cardHref, wheelTarget, bounceOffset } from '../src/cardRoute.js';
 import { readFileSync } from 'node:fs';
 let n = 0; const t = async (name, fn) => { await fn(); n++; console.log('ok', name); };
 
@@ -320,6 +321,33 @@ await t('card parsing and synced card data', () => {
     assert.ok(card.groups.every(x => GROUPS.includes(x)), card.slug);
     assert.ok(card.problem, card.slug);
   }
+});
+
+await t('cards page routes', () => {
+  assert.deepEqual(parseCardsRoute('#cards'), { group: null, focus: null });
+  assert.deepEqual(parseCardsRoute(cardsHref('风险与刺激')), { group: '风险与刺激', focus: null });
+  assert.deepEqual(parseCardsRoute('#cards/%E4%B9%B1'), { group: null, focus: null }, 'unknown group falls back to all');
+  assert.deepEqual(parseCardsRoute(cardHref('DBG-强效果必须带条件')), { group: null, focus: 'DBG-强效果必须带条件' });
+  assert.equal(parseCardsRoute('#work'), null); assert.equal(parseCardsRoute('#card-entry'), null); assert.equal(parseCardsRoute(''), null);
+  assert.equal(cardsHref(null), '#cards');
+});
+
+await t('wheel goes to card back first, then track, then page', () => {
+  const track = { scrollLeft: 100, scrollWidth: 2000, clientWidth: 1000 };
+  const inner = { scrollTop: 50, scrollHeight: 800, clientHeight: 400 };
+  assert.equal(wheelTarget({ deltaX: 0, deltaY: 40 }, track, null), 'track');
+  assert.equal(wheelTarget({ deltaX: 0, deltaY: 40 }, track, inner), 'inner');
+  assert.equal(wheelTarget({ deltaX: 0, deltaY: 40 }, track, { ...inner, scrollTop: 400 }), 'track', 'back at bottom hands off to track');
+  assert.equal(wheelTarget({ deltaX: 0, deltaY: -40 }, track, { ...inner, scrollTop: 0 }), 'track');
+  assert.equal(wheelTarget({ deltaX: 0, deltaY: -40 }, { ...track, scrollLeft: 0 }, null), 'page', 'track at start lets page scroll');
+  assert.equal(wheelTarget({ deltaX: 0, deltaY: 40 }, { ...track, scrollLeft: 1000 }, null), 'page');
+  assert.equal(wheelTarget({ deltaX: 0, deltaY: 40 }, { scrollLeft: 0, scrollWidth: 900, clientWidth: 1000 }, null), 'page');
+  assert.equal(wheelTarget({ deltaX: 50, deltaY: 10 }, track, null), 'page', 'native horizontal wheel untouched');
+});
+
+await t('bounce offset pushes neighbours away from hovered card', () => {
+  assert.deepEqual([0, 1, 2, 3].map(i => bounceOffset(i, 1, 20)), [-20, 0, 20, 20]);
+  assert.deepEqual([0, 1].map(i => bounceOffset(i, -1)), [0, 0]);
 });
 
 console.log(`${n} test groups passed`);
