@@ -185,6 +185,7 @@ await t('list posts from GitHub (mock)', async () => {
     if (m === 'GET' && /\/contents\/content\/posts\/methods\?/.test(path)) return r([{ type: 'file', name: 'bv1.md', size: 10 }]);
     if (m === 'GET' && path.includes('/contents/content/posts/breakdowns')) return r([]);
     if (m === 'GET' && path.includes('/contents/content/posts/picks')) return r([]);
+    if (m === 'GET' && path.includes('/contents/content/posts/devlog')) return r([]);
     throw new Error('unexpected ' + m + path);
   });
   try {

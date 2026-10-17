@@ -53,7 +53,7 @@ function sectionFromHash() {
 
 function Admin() {
   const [section, setSection] = useState(sectionFromHash); // drafts | published
-  const [tab, setTab] = useState(() => (sectionFromHash() === 'published' ? 'all' : 'drafts')); // drafts | methods | breakdowns | picks | all
+  const [tab, setTab] = useState(() => (sectionFromHash() === 'published' ? 'all' : 'drafts')); // drafts | methods | breakdowns | picks | devlog | all
   const [drafts, setDrafts] = useState([]);
   const [posts, setPosts] = useState([]);
   const [current, setCurrent] = useState(null); // { kind, name|category+slug, content, sha }
