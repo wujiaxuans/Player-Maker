@@ -23,6 +23,7 @@
    }
   ],
   "extra": [],
+  "addedAt": "2026-10-17",
   "groups": [
    "风险与刺激"
   ],
@@ -37,8 +38,7 @@
    "品类": [
     "类幸存者"
    ]
-  },
-  "addedAt": "2026-10-17"
+  }
  },
  {
   "slug": "类幸存者-单一资源双重兑现",
@@ -64,6 +64,7 @@
    }
   ],
   "extra": [],
+  "addedAt": "2026-10-17",
   "groups": [
    "成长与力量"
   ],
@@ -78,8 +79,7 @@
    "品类": [
     "类幸存者"
    ]
-  },
-  "addedAt": "2026-10-17"
+  }
  },
  {
   "slug": "类幸存者-敌人行为同质是品类短板",
@@ -94,6 +94,7 @@
   "source": "Jeff Vogel《The Fast Life and Fiery Death of Vampire Survivors Games》（2023-08-09）https://bottomfeeder.substack.com/p/the-fast-life-and-fiery-death-of",
   "related": [],
   "extra": [],
+  "addedAt": "2026-10-16",
   "groups": [
    "发现与新鲜感"
   ],
@@ -107,8 +108,7 @@
    "品类": [
     "类幸存者"
    ]
-  },
-  "addedAt": "2026-10-16"
+  }
  },
  {
   "slug": "类幸存者-放逐有限次数随奖池扩张开放",
@@ -136,6 +136,7 @@
   "extra": [
    "关系（非来源结论）：对照用户《鸦卫奇旅》拆解：天赋是升级时选一、可重掷。鸦卫只有\"重掷\"没有\"移出奖池\"，局外解锁越多选项越散，放逐正好是一个可以参考的工具"
   ],
+  "addedAt": "2026-10-16",
   "groups": [
    "取舍与策略"
   ],
@@ -150,8 +151,7 @@
    "品类": [
     "类幸存者"
    ]
-  },
-  "addedAt": "2026-10-16"
+  }
  },
  {
   "slug": "类幸存者-分段出怪节奏",
@@ -166,6 +166,7 @@
   "source": "弹壳特工队 https://www.gameres.com/898509.html",
   "related": [],
   "extra": [],
+  "addedAt": "2026-10-15",
   "groups": [
    "风险与刺激"
   ],
@@ -180,8 +181,50 @@
    "品类": [
     "类幸存者"
    ]
-  },
-  "addedAt": "2026-10-15"
+  }
+ },
+ {
+  "slug": "类幸存者-共用数值库把单一维度拉到极致做角色",
+  "title": "共用一套内容库，把某个维度拉到极致来做角色",
+  "insight": false,
+  "problem": "内容量有限，怎么做出体验截然不同的角色",
+  "m": "土豆兄弟的所有角色共用同一套武器、道具和天赋库，没有为任何角色单独做内容；角色只是在已有数值维度上做修正：游侠远程加成、初始近战为负；国王不能用最低级武器，高级武器加伤、低级减伤；多面手能装 12 把武器，但每多一把都降数值（配\"树枝越多越强\"的树枝武器）；独臂只能装一把但增伤很高；公牛不能用武器，受伤就爆炸",
+  "d": "同一套内容，被不同角色的规则重新定价，玩法差异很大",
+  "a": "发现、表达",
+  "premise": "数值框架要细分（近战、远程、工程、元素四种伤害类型）",
+  "risk": "评测者指出，只有到最高难度才需要读懂数值，前期仍是\"无脑爽\"",
+  "source": "UyNad《幸存者Like：颇有潜力的IP向衍生作品框架》https://uynad.me/2024/03/22/review/20240323-survivor-like/ （玩家评测，已读原文）",
+  "related": [
+   {
+    "name": "通用-设计空间先于卡牌数量",
+    "note": "",
+    "slug": "通用-设计空间先于卡牌数量"
+   },
+   {
+    "name": "DBG-强效果必须带条件",
+    "note": "土豆兄弟用负面属性道具来控制选择",
+    "slug": "DBG-强效果必须带条件"
+   }
+  ],
+  "extra": [],
+  "addedAt": "2026-10-17",
+  "groups": [
+   "发现与新鲜感",
+   "表达与自由"
+  ],
+  "tags": {
+   "体验": [
+    "表达",
+    "新鲜感"
+   ],
+   "机制": [
+    "成长",
+    "构筑"
+   ],
+   "品类": [
+    "类幸存者"
+   ]
+  }
  },
  {
   "slug": "类幸存者-核心循环螺旋化",
@@ -198,6 +241,7 @@
   "extra": [
    "自检问题：选第二张卡和选第一张，感觉有区别吗？"
   ],
+  "addedAt": "2026-10-15",
   "groups": [
    "成长与力量"
   ],
@@ -213,8 +257,43 @@
    "品类": [
     "类幸存者"
    ]
-  },
-  "addedAt": "2026-10-15"
+  }
+ },
+ {
+  "slug": "类幸存者-经验断点用临时加成抹平",
+  "title": "经验断点：用临时加成把\"墙\"抹平",
+  "insight": false,
+  "problem": "升级曲线想分段变陡，又不想让玩家觉得卡住了",
+  "m": "每级所需经验分三段线性增长（每级 +10 / +13 / +16）。20 级额外 +600 XP、40 级额外 +2400 XP，同时给一个\"成长 +100%\"的临时加成，到下一级为止",
+  "d": "额外开销和补偿是同一个断点上的两面，升级节奏基本不变，玩家看不出是\"墙\"",
+  "a": "成长感（平滑）",
+  "premise": "经验是局内唯一资源",
+  "risk": "具体数值以该站整理为准",
+  "source": "teemo.dev《Progression Systems: Vampire Survivors systems》https://teemo.dev/game-design/vampire-survivors/systems/progression-systems/ （已读原文；数值以该站整理为准，未与官方 wiki 逐项核对）",
+  "related": [
+   {
+    "name": "类幸存者-分段出怪节奏",
+    "note": "",
+    "slug": "类幸存者-分段出怪节奏"
+   }
+  ],
+  "extra": [],
+  "addedAt": "2026-10-17",
+  "groups": [
+   "成长与力量"
+  ],
+  "tags": {
+   "体验": [
+    "成长感"
+   ],
+   "机制": [
+    "成长",
+    "节奏"
+   ],
+   "品类": [
+    "类幸存者"
+   ]
+  }
  },
  {
   "slug": "类幸存者-可塑地形与限时撤离",
@@ -229,6 +308,7 @@
   "source": "GamesRadar/Edge 2025-04 深度稿亦详述可挖地形、五段 Boss、30 秒撤离放大贪婪 https://www.gamesradar.com/games/action/vampire-survivors-kicked-off-a-game-development-gold-rush-but-has-a-legitimately-new-genre-emerged-between-the-cash-ins/ ；另见 深岩银河：幸存者 https://curate.games/p/what-makes-a-genre-defining-game",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "风险与刺激"
   ],
@@ -240,6 +320,97 @@
    "机制": [
     "地图",
     "撤离"
+   ],
+   "品类": [
+    "类幸存者"
+   ]
+  }
+ },
+ {
+  "slug": "类幸存者-力量曲线先超车再被追上用时钟封顶",
+  "title": "力量曲线：先超过敌人，再被追上，最后用时钟封顶",
+  "insight": false,
+  "problem": "构筑成型后的割草爽感和局末的紧张感怎么同时要",
+  "m": "前期每次升级都是大跃进；10～12 分钟武器栏满、开始进化，曲线变陡；15～20 分钟成型的构筑明显超过敌人成长曲线，这是有意的\"力量幻想\"顶点；20 分钟以后玩家曲线变平，敌人血量还在涨，两条曲线在局末再次相交。大多数属性不设上限，因为 30 分钟时限替它们做了封顶；场上 300 个实体上限、五芒星不掉落物品、超时后每分钟多一个死神，都是护栏",
+  "d": "中段爽，末段紧；极端构筑可以通过诅咒、无尽模式继续飙",
+  "a": "爆发感、紧张感、成长感",
+  "premise": "一局有固定时长",
+  "risk": "中段超车的幅度太大，后段就追不上，紧张感消失",
+  "source": "teemo.dev《Progression Systems: Vampire Survivors systems》https://teemo.dev/game-design/vampire-survivors/systems/progression-systems/ （已读原文；数值以该站整理为准，未与官方 wiki 逐项核对）",
+  "related": [
+   {
+    "name": "类幸存者-场上上限逼你快杀",
+    "note": "",
+    "slug": "类幸存者-场上上限逼你快杀"
+   },
+   {
+    "name": "类幸存者-分段出怪节奏",
+    "note": "",
+    "slug": "类幸存者-分段出怪节奏"
+   }
+  ],
+  "extra": [
+   "关系（非来源结论）：用户鸦卫奇旅拆解里写过\"压力没有梯度\"，可以对照这里\"先超车、再被追上\"的有意设计"
+  ],
+  "addedAt": "2026-10-17",
+  "groups": [
+   "成长与力量",
+   "风险与刺激"
+  ],
+  "tags": {
+   "体验": [
+    "爽感",
+    "紧张"
+   ],
+   "机制": [
+    "成长",
+    "节奏",
+    "难度"
+   ],
+   "品类": [
+    "类幸存者"
+   ]
+  }
+ },
+ {
+  "slug": "类幸存者-六加六槽位上限把拿取变成舍弃",
+  "title": "6+6 槽位上限：每次拿取都变成\"舍弃什么\"",
+  "insight": false,
+  "problem": "升级三选一一直给新东西，构筑就没有方向",
+  "m": "最多 6 把武器 + 6 个被动。两栏都满后，升级只给已有物品的升级；全部满级后，空位变成金币袋或回血鸡腿。升级选项按稀有度加权抽取（武器池总权重 8130、被动池 1370），幸运值决定第 4 个选项的出现概率（1 − 1/幸运）。宝箱和关卡里放的物品不受这个上限限制",
+  "d": "拿到第五、六件以后，每次选择都是在决定放弃什么；有了上限，构筑就必须定方向",
+  "a": "取舍感、成长感",
+  "premise": "要有进化（武器配被动）之类给满栏奖励的东西",
+  "risk": "栏位满了以后，升级界面变成例行公事",
+  "source": "teemo.dev《Progression Systems: Vampire Survivors systems》https://teemo.dev/game-design/vampire-survivors/systems/progression-systems/ （已读原文；数值以该站整理为准，未与官方 wiki 逐项核对）",
+  "related": [
+   {
+    "name": "类幸存者-放逐有限次数随奖池扩张开放",
+    "note": "",
+    "slug": "类幸存者-放逐有限次数随奖池扩张开放"
+   },
+   {
+    "name": "类幸存者-刷新价阶梯与锁定",
+    "note": "",
+    "slug": "类幸存者-刷新价阶梯与锁定"
+   }
+  ],
+  "extra": [
+   "关系（非来源结论）：可以对照用户鸦卫奇旅拆解里的天赋选择：鸦卫没有\"栏位满后只给升级\"这一层，后期的选择更散"
+  ],
+  "addedAt": "2026-10-17",
+  "groups": [
+   "取舍与策略",
+   "成长与力量"
+  ],
+  "tags": {
+   "体验": [
+    "取舍",
+    "成长感"
+   ],
+   "机制": [
+    "构筑",
+    "成长"
    ],
    "品类": [
     "类幸存者"
@@ -259,6 +430,7 @@
   "source": "GamesRadar / Edge《Vampire Survivors gold rush》https://www.gamesradar.com/games/action/vampire-survivors-kicked-off-a-game-development-gold-rush-but-has-a-legitimately-new-genre-emerged-between-the-cash-ins/",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "成长与力量"
   ],
@@ -289,6 +461,7 @@
   "extra": [
    "观点：某个卡组强到玩坏游戏，也是乐趣的一部分（休闲向）"
   ],
+  "addedAt": null,
   "groups": [
    "成长与力量"
   ],
@@ -330,6 +503,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "取舍与策略"
   ],
@@ -359,6 +533,7 @@
   "source": "https://www.gameres.com/898509.html",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "成长与力量"
   ],
@@ -394,6 +569,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "公平与可接受的失败"
   ],
@@ -425,6 +601,7 @@
   "extra": [
    "细节：搜太久弹出\"差不多得了\"，用幽默做引导"
   ],
+  "addedAt": null,
   "groups": [
    "挑战与精通"
   ],
@@ -461,6 +638,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "挑战与精通"
   ],
@@ -502,6 +680,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "公平与可接受的失败"
   ],
@@ -545,6 +724,7 @@
   "extra": [
    "关系（非来源结论）：对照用户杀戮尖塔拆解\"稀缺资源制造取舍\"：同样用稀缺制造取舍，尖塔是单人对系统，逐墨是三方争夺同一份稀缺资源"
   ],
+  "addedAt": null,
   "groups": [
    "风险与刺激"
   ],
@@ -574,6 +754,7 @@
   "source": "杨金昊 GDC 2025 https://www.gameres.com/forum/t/912131",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "表达与自由"
   ],
@@ -602,6 +783,7 @@
   "source": "机核 https://www.gcores.com/articles/202087",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "风险与刺激"
   ],
@@ -642,6 +824,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "挑战与精通",
    "成长与力量"
@@ -678,6 +861,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "表达与自由",
    "社交与协作"
@@ -708,6 +892,7 @@
   "source": "杨金昊 GDC 2025 https://www.gameres.com/forum/t/912131",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "挑战与精通"
   ],
@@ -735,7 +920,7 @@
   "a": "紧张感、挑战、成长感",
   "premise": "经济系统的门槛、消耗、产出要平衡，作者认为这才是核心，射击只是外皮",
   "risk": "产出远大于消耗会通胀，一局纯亏会通缩；塔科夫靠删档、三角洲行动承诺不删档，各有代价",
-  "source": "游戏寿司《为什么全世界都在搜打撤？》（2025-04-21）https://news.qq.com/rain/a/20250421A07UJ900 ；Naavik https://naavik.co/f2p-mobile/extraction-shooters/ （配装、保险、死亡丢装被别人拿走、撤离才结算） ；阿鬼prime《撤离玩法设计迭代观察【游戏提灯#40】》https://www.bilibili.com/video/BV18EL369EoC （语音识别笔记，非逐字稿）（ARC Raiders 蓝图：局内带出才解锁生产力，UP 主认为掉率随机挫败过重）",
+  "source": "游戏寿司《为什么全世界都在搜打撤？》（2025-04-21）https://news.qq.com/rain/a/20250421A07UJ900 ；Naavik https://naavik.co/f2p-mobile/extraction-shooters/ （配装、保险、死亡丢装被别人拿走、撤离才结算） ；阿鬼prime《撤离玩法设计迭代观察【游戏提灯#40】》https://www.bilibili.com/video/BV18EL369EoC （语音识别笔记，非逐字稿）（ARC Raiders 蓝图：局内带出才解锁生产力，UP 主认为掉率随机挫败过重）；Alleid《\"搜打撤\"玩法分析（上）》3楼猫 https://game.3loumao.org/667127688 （损耗在局内、奖励在局外；玩家带着\"这一局和将来的对局\"进场；类比暗黑地牢以英雄为跨局资源、魂系死亡掉落）",
   "related": [
    {
     "name": "搜打撤-搜刮期待加撤离博弈双引擎",
@@ -749,6 +934,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "风险与刺激"
   ],
@@ -789,6 +975,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "风险与刺激"
   ],
@@ -824,6 +1011,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "幻想与主题"
   ],
@@ -864,6 +1052,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "风险与刺激"
   ],
@@ -893,6 +1082,7 @@
   "source": "https://www.gameeconomistconsulting.com/how-to-model-extraction-economies-in-google-sheets/",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -923,6 +1113,7 @@
   "source": "杨金昊 GDC 2025 https://www.gameres.com/forum/t/912131",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "表达与自由"
   ],
@@ -963,6 +1154,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -998,6 +1190,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "风险与刺激"
   ],
@@ -1028,6 +1221,7 @@
   "source": "阿鬼prime《撤离玩法设计迭代观察【游戏提灯#40】》https://www.bilibili.com/video/BV18EL369EoC （无官方字幕，视频分析员用 faster-whisper 语音识别整理的分段笔记，非逐字稿；《超自然行动组》《萤火突击》为按上下文推测的游戏名）（05:02–10:47）",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "发现与新鲜感"
   ],
@@ -1058,6 +1252,7 @@
   "source": "ARC Raiders 设计总监 https://kotaku.com/arc-raiders-embark-extraction-virgil-watkins-interview-2000639879 ；阿鬼prime《撤离玩法设计迭代观察【游戏提灯#40】》https://www.bilibili.com/video/BV18EL369EoC （语音识别笔记，非逐字稿）（Dark and Darker 侍从套装无限兜底，被 ARC Raiders、马拉松效仿）",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "公平与可接受的失败"
   ],
@@ -1099,6 +1294,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "风险与刺激",
    "发现与新鲜感"
@@ -1131,6 +1327,7 @@
   "source": "阿鬼prime《撤离玩法设计迭代观察【游戏提灯#40】》https://www.bilibili.com/video/BV18EL369EoC （无官方字幕，视频分析员用 faster-whisper 语音识别整理的分段笔记，非逐字稿；《超自然行动组》《萤火突击》为按上下文推测的游戏名）",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "取舍与策略"
   ],
@@ -1179,6 +1376,7 @@
   "extra": [
    "关系（非来源结论）：对应用户减法设计的检验：\"删掉/削弱它后主题是变强还是只是没变差\"——逃生舱让撤离不痛，却削弱了\"高风险\"主题，所以要改"
   ],
+  "addedAt": null,
   "groups": [
    "取舍与策略",
    "风险与刺激"
@@ -1215,6 +1413,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "风险与刺激",
    "公平与可接受的失败"
@@ -1246,6 +1445,7 @@
   "source": "阿鬼prime《撤离玩法设计迭代观察【游戏提灯#40】》https://www.bilibili.com/video/BV18EL369EoC （无官方字幕，视频分析员用 faster-whisper 语音识别整理的分段笔记，非逐字稿；《超自然行动组》《萤火突击》为按上下文推测的游戏名）（00:52）",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "风险与刺激",
    "社交与协作"
@@ -1282,6 +1482,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "风险与刺激"
   ],
@@ -1313,6 +1514,7 @@
   "extra": [
    "设计原则：玩家总有时间理解并反应，即使反应失败也能知道下次怎么改"
   ],
+  "addedAt": null,
   "groups": [
    "公平与可接受的失败"
   ],
@@ -1342,6 +1544,7 @@
   "source": "机核 https://www.gcores.com/articles/202087",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "公平与可接受的失败"
   ],
@@ -1352,6 +1555,56 @@
    ],
    "机制": [
     "地图"
+   ],
+   "品类": [
+    "搜打撤"
+   ]
+  }
+ },
+ {
+  "slug": "搜打撤-PvE开关降收益并保留残余威胁",
+  "title": "PvE 匹配开关：用更低收益和残余威胁换安全",
+  "insight": false,
+  "problem": "大批玩家想合作打 ARC、不想 PvP，又不能丢掉游戏的高紧张核心",
+  "m": "测试一个可随时切换的 PvE 匹配：PvE 局内玩家之间零伤害；单人、双人、三人混排；夜袭、隐藏地堡、锁门、护卫舰等高紧张条件不开放；整体战利品价值降低；被 ARC 击倒后爬行可能被重新锁定（不动则不会），用来保留一点紧张；PvE 不影响 PvPvE 的匹配分；PvPvE 局的基础掉落略微提高",
+  "d": "开发组公布的数据：37% 友好合作型（持续增长）、27% 混合、34% 纯 PvP（稳定）；超过 70% 的友好型和 40% 的 PvP 玩家希望少遇到敌对玩家，51% 表示想要专门的 PvE。决策方法：数据、玩家反馈、直觉三方互相印证",
+  "a": "伙伴、紧张感（降低）",
+  "premise": "经济要分开调，因为友好玩家撤离率和收益更高",
+  "risk": "开发组自己承认，PvE 可能削弱游戏赖以成立的紧张感；排队时间、PvPvE 局质量都可能受影响；这只是限时测试（2026-10-13～20），不承诺正式上线",
+  "source": "ARC Raiders（Aleks, Executive Producer）《We're testing a PvE Toggle》https://arcraiders.com/news/pve-toggle-beta-test （2026-09-24，已读原文）",
+  "related": [
+   {
+    "name": "搜打撤-太安全的撤离会被滥用必须付代价",
+    "note": "",
+    "slug": "搜打撤-太安全的撤离会被滥用必须付代价"
+   },
+   {
+    "name": "搜打撤-纯PVE可征服感",
+    "note": "",
+    "slug": "搜打撤-纯PVE可征服感"
+   },
+   {
+    "name": "通用-不必取悦所有人",
+    "note": "",
+    "slug": "通用-不必取悦所有人"
+   }
+  ],
+  "extra": [
+   "关系（非来源结论）：和用户的减法设计结论放在一起看：逃生舱要重做是因为它削弱了\"高风险\"主题，而 PvE 开关是把\"安全\"隔离成一个单独的模式，并用降收益来标价，不在主模式里稀释主题"
+  ],
+  "addedAt": "2026-10-17",
+  "groups": [
+   "风险与刺激",
+   "社交与协作"
+  ],
+  "tags": {
+   "体验": [
+    "伙伴",
+    "紧张"
+   ],
+   "机制": [
+    "多人",
+    "经济"
    ],
    "品类": [
     "搜打撤"
@@ -1377,6 +1630,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "挑战与精通"
   ],
@@ -1413,6 +1667,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "挑战与精通"
   ],
@@ -1441,6 +1696,7 @@
   "source": "鸭科夫开发者访谈 http://www.gamelook.com.cn/2026/02/588028/ ，由用户读后提炼",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -1449,6 +1705,41 @@
     "挫败缓解"
    ],
    "机制": [],
+   "品类": [
+    "通用"
+   ]
+  }
+ },
+ {
+  "slug": "通用-单机肉鸽不主动展示胜率",
+  "title": "单机肉鸽不主动展示胜率",
+  "insight": false,
+  "problem": "统计数据会不会冲淡胜利的感觉",
+  "m": "Richard Garfield 建议给玩家显示最近 5/10/20 局的胜率，作者没有采纳。连胜会记录，但只放在统计页，不显眼；作者也不喜欢以撒那种\"连败\"计数",
+  "d": "连输四局后终于赢了，应该觉得扬眉吐气，而不是被提醒\"你的胜率是 20%\"；想统计的玩家会自己记",
+  "a": "挫败缓解、成长感",
+  "premise": "单机",
+  "risk": "主持人提到 LocalThunk 在小丑牌里也选择不预先显示这手牌的分数——有些数字就算玩家能算出来，也不该突出显示",
+  "source": "Dan DiIorio《Luck be a Landlord - 10 Lessons Learned》Roguelike Celebration https://www.youtube.com/watch?v=fSmaqjbU2xg （按英文字幕核实）",
+  "related": [
+   {
+    "name": "通用-信息透明让选择有意义",
+    "note": "决策用的信息要透明，结果统计可以低调",
+    "slug": "通用-信息透明让选择有意义"
+   }
+  ],
+  "extra": [],
+  "addedAt": "2026-10-17",
+  "groups": [
+   "公平与可接受的失败"
+  ],
+  "tags": {
+   "体验": [
+    "挫败缓解"
+   ],
+   "机制": [
+    "信息"
+   ],
    "品类": [
     "通用"
    ]
@@ -1467,6 +1758,7 @@
   "source": "鸭科夫开发者访谈 http://www.gamelook.com.cn/2026/02/588028/ ，由用户读后提炼",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "表达与自由"
   ],
@@ -1477,6 +1769,46 @@
    "机制": [
     "难度",
     "地图"
+   ],
+   "品类": [
+    "通用"
+   ]
+  }
+ },
+ {
+  "slug": "通用-发现设计问题趁早砍别等玩家依恋",
+  "title": "发现设计问题趁早砍，别等玩家产生依恋",
+  "insight": false,
+  "problem": "明知某个内容有问题，却因为\"玩家喜欢\"一拖再拖",
+  "m": "教徒（cultist）单独没用、越多越强，很多人一看到就走教徒流；但这条流派无聊，要么凑够了赢，要么运气差凑不齐。作者在开发早期就发现了问题，却觉得\"已经晚了\"；等游戏出了 EA 好几年，再改的反弹会大得多",
+  "d": "越晚砍，代价越高；作者现在不改，因为会拿走很多人的快乐（主持人自己就爱看满屏教徒）",
+  "a": "（服务于设计聚焦）",
+  "premise": "EA 或测试阶段是砍内容的窗口",
+  "risk": "也有玩家并不追求赢，就是喜欢某条流派；砍之前要先弄清它服务的是哪类玩家",
+  "source": "Dan DiIorio《Luck be a Landlord - 10 Lessons Learned》Roguelike Celebration https://www.youtube.com/watch?v=fSmaqjbU2xg （按英文字幕核实）",
+  "related": [
+   {
+    "name": "自走棋-新机制要先替换旧机制防臃肿",
+    "note": "",
+    "slug": "自走棋-新机制要先替换旧机制防臃肿"
+   },
+   {
+    "name": "通用-减法设计让游戏明确关于某件事",
+    "note": "",
+    "slug": "通用-减法设计让游戏明确关于某件事"
+   }
+  ],
+  "extra": [
+   "关系（非来源结论）：可以作为用户减法设计文章\"什么时候砍\"的补充——判断标准没变（主题有没有变强），但时间点越早，代价越小"
+  ],
+  "addedAt": "2026-10-17",
+  "groups": [
+   "设计方法与工具"
+  ],
+  "tags": {
+   "体验": [],
+   "机制": [
+    "平衡"
    ],
    "品类": [
     "通用"
@@ -1502,6 +1834,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -1523,7 +1856,7 @@
   "a": "挑战、成长感",
   "premise": "系统能拆成可分步解锁的层",
   "risk": "作者说的\"数量不是深度\"——堆系统只增加入门负担",
-  "source": "Javier Barnes《Autochess: Genre Analysis》https://javierbarnes.com/blog/autochess-status-and-design-analysis/ （已读原文）",
+  "source": "Javier Barnes《Autochess: Genre Analysis》https://javierbarnes.com/blog/autochess-status-and-design-analysis/ （已读原文）；Dan DiIorio《Luck be a Landlord - 10 Lessons Learned》https://www.youtube.com/watch?v=fSmaqjbU2xg （借鉴 MTG New World Order：复杂效果只放在罕见及以上；开局只出普通符号，稀有度概率随选择次数逐步上升，形成局内复杂度曲线）",
   "related": [
    {
     "name": "通用-角色创建分步引导再放开",
@@ -1539,6 +1872,7 @@
   "extra": [
    "关系（非来源结论）：对照用户鸦卫拆解里\"节点种类太多，新手上手难\"和减法设计讨论：内容层砍掉重复节点，就是在降\"平的复杂度\""
   ],
+  "addedAt": null,
   "groups": [
    "挑战与精通"
   ],
@@ -1579,6 +1913,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "社交与协作"
   ],
@@ -1620,6 +1955,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "取舍与策略"
   ],
@@ -1649,6 +1985,7 @@
   "source": "Tim Cain《Real Time vs. Turn Based Combat》（2026-08-12）https://www.youtube.com/watch?v=5RhLPvZ_Y1M （自动字幕）",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -1690,6 +2027,7 @@
   "extra": [
    "关系（非来源结论）：用户《减法设计》文章的检验是\"主题变强了，还是只是没变差\"；千水的\"类型必需品\"是同一问题从立项端问：没变强的类型惯例也该被问一遍"
   ],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -1732,6 +2070,7 @@
   "extra": [
    "关系（非来源结论）：和用户《减法设计》文章（主题→体验→循环，逐个问有没有必要）同一路线；文章里用的是只狼和尖塔，Ico/Fez 是这个说法的源头例子"
   ],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -1740,6 +2079,54 @@
     "代入"
    ],
    "机制": [],
+   "品类": [
+    "通用"
+   ]
+  }
+ },
+ {
+  "slug": "通用-讲给朋友听嫌麻烦的规则就砍",
+  "title": "讲给朋友听都嫌麻烦的规则，就砍",
+  "insight": false,
+  "problem": "肉鸽卡牌怎么做得轻一点、好上手，又不失深度",
+  "m": "Cobalt Core 砍掉了货币（商店变成\"三选一挑一样\"）、局外成长（解锁新角色，但不强化老角色）；卡上的数字几乎不上两位数，方便心算；原型里的二维网格飞船很快简化成一维部件行；无人机简化成\"1 格、做 1 件事、1 下就死\"。角色机制要和核心系统挂钩，最好让人重新理解一个原有系统（Max 的牌指定手牌最左边那张，让抽牌顺序变得重要）；太偏、像在玩另一款游戏的系统被砍掉。原型用 Tabletop Simulator 做，一个新变体半小时就能试完",
+  "d": "标准是\"如果某条规则在桌游夜跟朋友解释起来很烦，它就不够好\"",
+  "a": "易读上手、取舍感",
+  "premise": "核心循环先用低成本原型验证",
+  "risk": "砍掉货币和局外成长，也就少了这两条长期目标",
+  "source": "Game Developer（Joel Couture）《How Cobalt Core makes movement as exciting as fighting…》https://www.gamedeveloper.com/design/how-cobalt-core-makes-movement-as-exciting-as-fighting-in-its-roguelike-deckbuilder-combat （2024-03-15，开发者访谈，已读原文）",
+  "related": [
+   {
+    "name": "通用-减法设计让游戏明确关于某件事",
+    "note": "",
+    "slug": "通用-减法设计让游戏明确关于某件事"
+   },
+   {
+    "name": "DBG-联动核心机制而非具体卡",
+    "note": "",
+    "slug": "DBG-联动核心机制而非具体卡"
+   },
+   {
+    "name": "搜打撤-风险管理内核可移植到回合制",
+    "note": "也用 Excel 做桌游原型",
+    "slug": "搜打撤-风险管理内核可移植到回合制"
+   }
+  ],
+  "extra": [
+   "关系（非来源结论）：可以作为用户减法设计文章的一个具体检验方法；也对应鸦卫拆解里\"节点种类太多，新手上手难\""
+  ],
+  "addedAt": "2026-10-17",
+  "groups": [
+   "挑战与精通",
+   "设计方法与工具"
+  ],
+  "tags": {
+   "体验": [
+    "易读上手"
+   ],
+   "机制": [
+    "循环"
+   ],
    "品类": [
     "通用"
    ]
@@ -1758,6 +2145,7 @@
   "source": "Tim Cain《Psychology In Video Game Design》https://www.youtube.com/watch?v=CvILSkc20vo （讨论 Fallout 角色创建；按英文字幕核实）",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "表达与自由"
   ],
@@ -1791,6 +2179,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "发现与新鲜感"
   ],
@@ -1804,6 +2193,54 @@
    ],
    "品类": [
     "RPG"
+   ]
+  }
+ },
+ {
+  "slug": "通用-精心安排每个规则要素首次出现的场景",
+  "title": "精心安排每个规则要素第一次出现的场景",
+  "insight": false,
+  "problem": "肉鸽的主规则必须几乎瞬间学会，因为第一局大概率很快输掉",
+  "m": "作者建议借鉴不可重复游戏的做法，调控前几局的随机事件，让不重要又可能让人困惑的要素晚点出现。他假设的例子（明确说不知道 Hades 是否真这么做）：第一个战利品是祝福、三个选项都在原文说的\"五常位置\"之一；第一个商店每种商品各一个、身上的钱刚好够买一样。死亡细胞进阶 1 以上才解锁普通结局以外的结局。尖塔新手不知道怎么躲开心脏剧情杀，也不影响他发现通关三层就能解锁进度",
+  "d": "已经学会的规则让人愿意继续玩，没学会的规则不会频繁制造影响体验的意外",
+  "a": "易读上手、发现",
+  "premise": "流程对称性高的游戏更容易安排；以撒这类变数大的游戏更难",
+  "risk": "作者提醒，新作测试时来的多是肉鸽狂热者，他们的上手速度不代表普通玩家",
+  "source": "东风（USTC 个人主页）《肉鸽游戏的游戏设计理论》http://home.ustc.edu.cn/~eastwind/_gd05_roguelike_game.html （2026-02，写作中的讲义，已读到第 2 章开头；部分段落原文即为占位 ***）",
+  "related": [
+   {
+    "name": "通用-复杂度要逐步展开而不是一次全给",
+    "note": "",
+    "slug": "通用-复杂度要逐步展开而不是一次全给"
+   },
+   {
+    "name": "通用-角色创建分步引导再放开",
+    "note": "",
+    "slug": "通用-角色创建分步引导再放开"
+   },
+   {
+    "name": "DBG-稀有度本质是控制出现时机",
+    "note": "",
+    "slug": "DBG-稀有度本质是控制出现时机"
+   }
+  ],
+  "extra": [],
+  "addedAt": "2026-10-17",
+  "groups": [
+   "挑战与精通",
+   "发现与新鲜感"
+  ],
+  "tags": {
+   "体验": [
+    "易读上手",
+    "新鲜感"
+   ],
+   "机制": [
+    "随机",
+    "难度"
+   ],
+   "品类": [
+    "通用"
    ]
   }
  },
@@ -1831,6 +2268,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "挑战与精通",
    "公平与可接受的失败"
@@ -1861,6 +2299,7 @@
   "source": "https://ld0.indienova.com/indie-game-development/game-design-theory-5/",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -1868,6 +2307,49 @@
    "体验": [],
    "机制": [
     "循环"
+   ],
+   "品类": [
+    "通用"
+   ]
+  }
+ },
+ {
+  "slug": "通用-可选难度档同时回应太易与太难",
+  "title": "用可选难度档同时回应\"太简单\"和\"太难\"",
+  "insight": false,
+  "problem": "照着声音大的反馈去改基础难度，结果反馈正好反过来",
+  "m": "EA 期间很多人说太简单，作者调难了基础难度，随后又来了\"太难、觉得赢不了\"的反馈。最后加了 20 档可解锁难度（类似尖塔进阶），两种反馈都停了。另外，\"大增益更新\"把很多内容只加强一点点（浇水壶 10→12 金），因为很多局只差 1 金币就赢；这样能多帮一些人赢下来，又不会让想要挑战的玩家觉得变简单了",
+  "d": "作者的原则是\"听见没说出口的话\"——改动要照顾到沉默、满意的那部分玩家，不然只会在两种反馈之间来回打地鼠",
+  "a": "挑战、挫败缓解",
+  "premise": "先有一个对大多数人合适的基础难度",
+  "risk": "难度档如果只加数值，后面几档会显得单调（这是关系判断，不是作者原话）",
+  "source": "Dan DiIorio《Luck be a Landlord - 10 Lessons Learned》Roguelike Celebration https://www.youtube.com/watch?v=fSmaqjbU2xg （按英文字幕核实）",
+  "related": [
+   {
+    "name": "通用-阈值保护体验又给设计师参照",
+    "note": "",
+    "slug": "通用-阈值保护体验又给设计师参照"
+   },
+   {
+    "name": "通用-不必取悦所有人",
+    "note": "",
+    "slug": "通用-不必取悦所有人"
+   }
+  ],
+  "extra": [
+   "关系（非来源结论）：用户的鸦卫奇旅减法讨论里提到\"四个难度只加数值\"，可以对照这里\"按档解锁\"和\"小幅加强\"两种做法"
+  ],
+  "addedAt": "2026-10-17",
+  "groups": [
+   "挑战与精通"
+  ],
+  "tags": {
+   "体验": [
+    "精通",
+    "挫败缓解"
+   ],
+   "机制": [
+    "难度"
    ],
    "品类": [
     "通用"
@@ -1893,6 +2375,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "发现与新鲜感"
   ],
@@ -1932,6 +2415,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "取舍与策略"
   ],
@@ -1970,6 +2454,7 @@
   "extra": [
    "关系（非来源结论）：对照用户《鸦卫奇旅》拆解里的缺点\"多人模式削弱核心设计\"。鸦卫的多人缺少\"必须靠队友\"的机制，分开清图更有效率，正是作者说的\"并行单机\""
   ],
+  "addedAt": null,
   "groups": [
    "社交与协作"
   ],
@@ -1979,6 +2464,50 @@
    ],
    "机制": [
     "多人"
+   ],
+   "品类": [
+    "通用"
+   ]
+  }
+ },
+ {
+  "slug": "通用-肉鸽是随机选项更新构筑加战斗判负",
+  "title": "肉鸽的定义：随机给选项→决策更新构筑→战斗判负",
+  "insight": false,
+  "problem": "凡有随机就算肉鸽吗？扫雷、麻将、象棋算不算",
+  "m": "作者先反驳\"随机事件—决策交错\"这个定义，因为相邻的随机可以合并、相邻的决策也可以合并，按这个定义扫雷、单人麻将甚至象棋都算肉鸽。他给出两条：①有\"构筑\"，玩家用它进行单场战斗，每场战斗判定是否失败；②反复出现能改变构筑的\"随机—决策\"结构，而且改变是建设性的。他据此说明\"随机—决策—判负\"健康，\"决策—随机—判负\"病态。规则可以分成战斗模块和构筑模块：战斗模块可以单独成立，构筑模块离不开战斗规则；但长期体验更多由构筑模块决定，战斗规则则决定单卡设计空间的上限",
+  "d": "熟练以后，战斗趋于\"平凡\"（就像麻将：构筑凑齐就赢），讨论集中在怎么抓牌",
+  "a": "取舍感、发现",
+  "premise": "作者明确说这个定义靠自然语言，\"构筑\"\"建设性\"都有模糊空间",
+  "risk": "好的战斗规则和好的构筑规则拼在一起，不一定得到好游戏，两者不可分离",
+  "source": "东风（USTC 个人主页）《肉鸽游戏的游戏设计理论》http://home.ustc.edu.cn/~eastwind/_gd05_roguelike_game.html （2026-02，写作中的讲义，已读到第 2 章开头；部分段落原文即为占位 ***）",
+  "related": [
+   {
+    "name": "通用-可玩性与耐玩性",
+    "note": "",
+    "slug": "通用-可玩性与耐玩性"
+   },
+   {
+    "name": "DBG-整体循环与构筑驱动",
+    "note": "",
+    "slug": "DBG-整体循环与构筑驱动"
+   }
+  ],
+  "extra": [
+   "关系（非来源结论）：可以对照用户的杀戮尖塔拆解：尖塔的\"信息公开、先看选项再决定\"正是作者说的健康结构"
+  ],
+  "addedAt": "2026-10-17",
+  "groups": [
+   "设计方法与工具"
+  ],
+  "tags": {
+   "体验": [
+    "取舍"
+   ],
+   "机制": [
+    "循环",
+    "构筑",
+    "随机"
    ],
    "品类": [
     "通用"
@@ -1998,6 +2527,7 @@
   "source": "Monster Train 2 开发者直播（https://www.youtube.com/watch?v=--fdN68uCnA），视频分析员语音转写的分段笔记 /workspace/bilibili-transcripts/YT--fdN68uCnA-MonsterTrain2-deckbuilder-design.md；人名经语音识别，可能有误",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -2032,6 +2562,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "幻想与主题"
   ],
@@ -2060,6 +2591,7 @@
   "source": "Tim Cain《Psychology In Video Game Design》https://www.youtube.com/watch?v=CvILSkc20vo （按英文字幕核实）",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "幻想与主题"
   ],
@@ -2088,6 +2620,7 @@
   "source": "鸭科夫开发者访谈 http://www.gamelook.com.cn/2026/02/588028/ ，由用户读后提炼",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -2114,6 +2647,7 @@
   "source": "刀塔自走棋 vs 战三国 https://www.gameres.com/841302.html",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "取舍与策略",
    "公平与可接受的失败"
@@ -2160,6 +2694,7 @@
    "来源类型：用户见解（基于访谈整理）",
    "A（体验）：思考感、掌控感；失败可归因于自己的判断"
   ],
+  "addedAt": null,
   "groups": [
    "取舍与策略"
   ],
@@ -2196,6 +2731,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "成长与力量",
    "幻想与主题"
@@ -2227,6 +2763,7 @@
   "source": "https://www.gamedeveloper.com/design/the-pyramid-of-free-to-play-game-design",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -2255,6 +2792,7 @@
   "source": "https://www.gamedeveloper.com/business/the-compulsion-loop-explained",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -2283,6 +2821,7 @@
   "source": "Henric Suuronen GDC Europe 2011 https://www.gamedeveloper.com/design/video-how-to-make-killer-game-loops",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -2317,6 +2856,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "挑战与精通"
   ],
@@ -2347,6 +2887,7 @@
   "source": "https://indienova.com/indie-game-development/game-design-theory-4/",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "取舍与策略"
   ],
@@ -2386,6 +2927,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "取舍与策略",
    "发现与新鲜感"
@@ -2428,6 +2970,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "挑战与精通"
   ],
@@ -2458,6 +3001,7 @@
   "source": "Super Auto Pets https://a327ex.com/posts/super_auto_pets_mechanics",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -2490,6 +3034,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "表达与自由"
   ],
@@ -2516,9 +3061,10 @@
   "a": "探索、表达、挑战",
   "premise": "单位数量足够、每个羁绊独立可读",
   "risk": "组合过多会让平衡测试成本暴涨",
-  "source": "刀塔自走棋 https://www.gameres.com/841302.html",
+  "source": "刀塔自走棋 https://www.gameres.com/841302.html；榭与炘风 3楼猫 https://game.3loumao.org/36881 （并联去中心化 vs 天赋树式分层；羁绊跨赛季保留，降低学习和设计成本）",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "挑战与精通"
   ],
@@ -2536,6 +3082,43 @@
   }
  },
  {
+  "slug": "自走棋-给玩家保住单位的理由",
+  "title": "给玩家一个保住单位的理由",
+  "insight": false,
+  "problem": "单位便宜，死了就再买，阵容养成就没意义",
+  "m": "Despot's Game：每移动一步都要给单位喂食物（食物可以买，也可以把单位\"吃掉\"来换），这自然限制了队伍规模；单位靠战斗经验升级；单位死后有时会返还它的职业道具。The Dungeon Beneath：每升一级多一个装备槽，队伍最多 6 格（不含英雄），要决定优先培养谁",
+  "d": "作者认为战斗经验升级就是为了让玩家不随手丢弃单位；食物维持成本鼓励更小、更高效的队伍",
+  "a": "成长感、取舍感",
+  "premise": "单位获取成本低",
+  "risk": "维持成本太重，玩家不敢尝试新单位",
+  "source": "Savallion《Game design deep dive: what makes autobattlers fun?》https://www.youtube.com/watch?v=MgvZ3ohbveU （2023-06，独立开发者评测视频，按英文字幕核实）",
+  "related": [
+   {
+    "name": "自走棋-线性升级替代三合一升星",
+    "note": "",
+    "slug": "自走棋-线性升级替代三合一升星"
+   }
+  ],
+  "extra": [],
+  "addedAt": "2026-10-17",
+  "groups": [
+   "成长与力量"
+  ],
+  "tags": {
+   "体验": [
+    "成长感",
+    "取舍"
+   ],
+   "机制": [
+    "成长",
+    "经济"
+   ],
+   "品类": [
+    "自走棋"
+   ]
+  }
+ },
+ {
   "slug": "自走棋-共享牌池自动配重",
   "title": "共享有限牌池自动配重",
   "insight": false,
@@ -2545,9 +3128,10 @@
   "a": "挑战、掌控感（读局势）、紧张感（抢牌）",
   "premise": "多人同局、牌池公开可观察",
   "risk": "走背字的玩家砸钱凑不齐会极度挫败，需要算保底线",
-  "source": "云顶之弈 https://indienova.com/u/fabean/blogread/38657",
+  "source": "云顶之弈 https://indienova.com/u/fabean/blogread/38657；榭与炘风 3楼猫 https://game.3loumao.org/36881 （\"卡棋\"\"卡装备\"博弈，冷门羁绊刷新率自然变高）",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "取舍与策略",
    "社交与协作"
@@ -2591,6 +3175,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "取舍与策略"
   ],
@@ -2617,9 +3202,10 @@
   "a": "掌控感、挑战、翻盘感",
   "premise": "血量作为可消耗资源，金币不能直接买战力",
   "risk": "连败流过强会让对局变消极",
-  "source": "https://www.gameres.com/841302.html ；https://indienova.com/u/fabean/blogread/38657 ；Gangles《Balatro & Auto Chess》https://gangles.ca/2024/07/07/balatro-auto-chess/ （利息奖励\"刚好赢\"，小丑牌同样每 $5 得 $1）；游戏那点事 TFT S17 采访 http://www.nadianshi.com/2026/05/410136 （神域保留按连败提高奖励）",
+  "source": "https://www.gameres.com/841302.html ；https://indienova.com/u/fabean/blogread/38657 ；Gangles《Balatro & Auto Chess》https://gangles.ca/2024/07/07/balatro-auto-chess/ （利息奖励\"刚好赢\"，小丑牌同样每 $5 得 $1）；游戏那点事 TFT S17 采访 http://www.nadianshi.com/2026/05/410136 （神域保留按连败提高奖励）；榭与炘风 3楼猫 https://game.3loumao.org/36881 （模拟连胜、连败经济累积大致相同）",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "取舍与策略",
    "公平与可接受的失败"
@@ -2656,6 +3242,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "取舍与策略"
   ],
@@ -2665,6 +3252,47 @@
    ],
    "机制": [
     "战斗"
+   ],
+   "品类": [
+    "自走棋"
+   ]
+  }
+ },
+ {
+  "slug": "自走棋-卖出损耗控制转型成本",
+  "title": "卖出损耗：用来控制转型成本",
+  "insight": false,
+  "problem": "玩家什么时候该换阵容，什么时候该坚持",
+  "m": "早期云顶：一星棋子卖出不亏；品质越高、星级越高，卖出损耗越大。作者写作时（S5.5～S6）的版本已改成无论什么棋子，卖出最多只亏 1 金币",
+  "d": "早期规则：前期可以无损过渡，中后期鼓励优化而不是推倒重来，高费棋子的价值和风险更突出。新规则：鼓励任何阶段都大胆转型",
+  "a": "取舍感、表达",
+  "premise": "棋子可以买卖，经济是主要约束",
+  "risk": "转型成本太低，坚持一条路就不再是选择",
+  "source": "榭与炘风《【云顶之弈】传统自走棋玩法的尝试性总体拆解（个人向）》3楼猫 https://game.3loumao.org/36881 （2022，基于 S5.5，已读原文）",
+  "related": [
+   {
+    "name": "自走棋-利息与连胜连败",
+    "note": "",
+    "slug": "自走棋-利息与连胜连败"
+   },
+   {
+    "name": "自走棋-落子不可移动",
+    "note": "",
+    "slug": "自走棋-落子不可移动"
+   }
+  ],
+  "extra": [],
+  "addedAt": "2026-10-17",
+  "groups": [
+   "取舍与策略"
+  ],
+  "tags": {
+   "体验": [
+    "取舍",
+    "策略规划"
+   ],
+   "机制": [
+    "经济"
    ],
    "品类": [
     "自走棋"
@@ -2700,6 +3328,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "公平与可接受的失败"
   ],
@@ -2729,6 +3358,7 @@
   "source": "Jiayu《如何让自走棋游戏更好玩？从把握平衡性开始》https://indienova.com/indie-game-development/balance-of-auto-chess/ （战歌竞技场）",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -2739,6 +3369,48 @@
    "机制": [
     "平衡",
     "数据"
+   ],
+   "品类": [
+    "自走棋"
+   ]
+  }
+ },
+ {
+  "slug": "自走棋-失败伤害随局势放大前缓后急",
+  "title": "输一场掉多少血随局势放大：前缓后急",
+  "insight": false,
+  "problem": "大逃杀式的一局怎样有节奏感，血量怎样成为可以规划的资源",
+  "m": "胜方存活棋子越多、品质越高、星级越高，对败方造成的伤害越大；前期输一场掉 1～2 点，后期接近 20 点，系统还可能按阶段额外放大",
+  "d": "前期可以拿血换连败补偿；后期容错越来越低，剩余血量反而成了保障性资源。云顶选秀让低血量先选，血量间接换来资源",
+  "a": "紧张感、取舍感",
+  "premise": "血量不可再生，是一种跨回合资源",
+  "risk": "后期太急，一两次失误就直接出局",
+  "source": "榭与炘风《【云顶之弈】传统自走棋玩法的尝试性总体拆解（个人向）》3楼猫 https://game.3loumao.org/36881 （2022，基于 S5.5，已读原文）",
+  "related": [
+   {
+    "name": "自走棋-利息与连胜连败",
+    "note": "",
+    "slug": "自走棋-利息与连胜连败"
+   },
+   {
+    "name": "自走棋-资源换胜利胜利换资源的滚雪球",
+    "note": "",
+    "slug": "自走棋-资源换胜利胜利换资源的滚雪球"
+   }
+  ],
+  "extra": [],
+  "addedAt": "2026-10-17",
+  "groups": [
+   "风险与刺激"
+  ],
+  "tags": {
+   "体验": [
+    "紧张",
+    "策略规划"
+   ],
+   "机制": [
+    "节奏",
+    "经济"
    ],
    "品类": [
     "自走棋"
@@ -2758,6 +3430,7 @@
   "source": "游戏葡萄 青晖《天美2026重磅新品，把自走棋改了个底朝天》（2026-01-25）https://news.qq.com/rain/a/20260125A04CE100",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "成长与力量"
   ],
@@ -2800,6 +3473,7 @@
   "extra": [
    "关系（非来源结论）：对应用户的减法设计结论\"每个机制都要问有没有必要\"，补充一条做法：拆旧机制前先把它的意图（反滚雪球）挪到新机制里——这也是千水视频里\"切斯特顿的栅栏\"讲的"
   ],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -2828,6 +3502,7 @@
   "source": "https://indienova.com/indie-game-development/balance-of-auto-chess/",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -2863,6 +3538,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "社交与协作"
   ],
@@ -2873,6 +3549,54 @@
    "机制": [
     "多人",
     "节奏"
+   ],
+   "品类": [
+    "自走棋"
+   ]
+  }
+ },
+ {
+  "slug": "自走棋-战斗可预测随机放在获取端",
+  "title": "战斗要可预测，随机放在获取端",
+  "insight": false,
+  "problem": "自动战斗里，玩家怎样觉得结果是自己的策略造成的",
+  "m": "作者以 Super Auto Pets 为例：每只动物只有一个能力，文字写明触发时机（开战、结束、受伤、造成伤害），触发顺序清楚。作者认为自动战斗本身不该有随机，随机应该放在获取单位和事件上。反例：Jess King 的单位描述密，作者看不懂角色定位，单位常做出意料之外的事；Despot's Game 战斗中看不到全队血量，判断不了强弱。好例子：Jess King 和 Despot's Game 用地上骷髅标出敌人出生位置，越大越强",
+  "d": "玩家能拿到信息去制定策略，输了能找到原因",
+  "a": "掌控感、公平",
+  "premise": "玩家的决策都在战前",
+  "risk": "这是一位开发者初玩几款游戏后的个人观点（视频 2023-06）",
+  "source": "Savallion《Game design deep dive: what makes autobattlers fun?》https://www.youtube.com/watch?v=MgvZ3ohbveU （2023-06，独立开发者评测视频，按英文字幕核实）",
+  "related": [
+   {
+    "name": "通用-先挑货后付款",
+    "note": "",
+    "slug": "通用-先挑货后付款"
+   },
+   {
+    "name": "通用-信息透明让选择有意义",
+    "note": "",
+    "slug": "通用-信息透明让选择有意义"
+   },
+   {
+    "name": "DBG-失败要能归因到自己的选择",
+    "note": "",
+    "slug": "DBG-失败要能归因到自己的选择"
+   }
+  ],
+  "extra": [],
+  "addedAt": "2026-10-17",
+  "groups": [
+   "公平与可接受的失败"
+  ],
+  "tags": {
+   "体验": [
+    "公平",
+    "策略规划"
+   ],
+   "机制": [
+    "战斗",
+    "信息",
+    "随机"
    ],
    "品类": [
     "自走棋"
@@ -2905,6 +3629,7 @@
   "extra": [
    "关系（非来源结论）：对照用户《鸦卫奇旅》缺点\"滚雪球效应明显\"\"前期运气差就很难翻身\"：同一结构——前期成长快的人清图更快，拿到更多成长。鸦卫没有对局内补偿机制"
   ],
+  "addedAt": null,
   "groups": [
    "公平与可接受的失败"
   ],
@@ -2941,6 +3666,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -2970,6 +3696,7 @@
   "source": "Monster Train 2 开发者直播（https://www.youtube.com/watch?v=--fdN68uCnA），视频分析员语音转写的分段笔记 /workspace/bilibili-transcripts/YT--fdN68uCnA-MonsterTrain2-deckbuilder-design.md；人名经语音识别，可能有误",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -2979,6 +3706,93 @@
    ],
    "机制": [
     "抽牌",
+    "平衡"
+   ],
+   "品类": [
+    "DBG"
+   ]
+  }
+ },
+ {
+  "slug": "DBG-成套加入卡牌把复杂度花在少量大决策上",
+  "title": "成套加入卡牌：把复杂度花在少量大决策上",
+  "insight": false,
+  "problem": "一张一张三选一，决策次数多、单卡必须简单、卡池必须大且均衡，还得给删牌",
+  "m": "一次加入一组牌，通常挂在装备上。Card Hunter：三名英雄各 36 张牌，每件装备给 3 张（武器 6 张），10 次选择凑满 36 张；Card Quest：17 张牌由三套 4～6 张组成；桌游 Star Trek Fleet Captains 从 10 套里选 4 套凑 40 张。作者的说法：\"复杂度预算\"固定，可以花在很多次小决策上，也可以花在少数几次大决策上",
+  "d": "选择次数少，但每次要比较一整组牌，更纠结；注意力从\"构筑\"移到\"打出手上的牌\"。作者比喻：单卡是找零件拼引擎，成套是拿到能用的部件去造一辆好开的车",
+  "a": "取舍感、掌控感",
+  "premise": "构筑不必是唯一核心；用装备或角色作为\"一套\"的载体",
+  "risk": "作者说还没有爆款验证过这种做法；每局的组合空间比单卡模式小",
+  "source": "Alexander King《Don't Pick Just One: Set-Based Card Mechanics in Roguelike-Deckbuilders》Roguelike Celebration https://www.youtube.com/watch?v=uwiFwic03EE （按英文字幕核实）",
+  "related": [
+   {
+    "name": "DBG-成套卡牌让设计师控制组合与平衡",
+    "note": "",
+    "slug": "DBG-成套卡牌让设计师控制组合与平衡"
+   },
+   {
+    "name": "DBG-跳过选项制造三阶段纠结",
+    "note": "",
+    "slug": "DBG-跳过选项制造三阶段纠结"
+   }
+  ],
+  "extra": [
+   "关系（非来源结论）：可以对照用户的杀戮尖塔拆解——尖塔走的是\"单卡 + 删牌\"这条路，作者列的单卡模式的代价（卡池大、要删牌、单卡简单），尖塔基本都有"
+  ],
+  "addedAt": "2026-10-17",
+  "groups": [
+   "取舍与策略",
+   "设计方法与工具"
+  ],
+  "tags": {
+   "体验": [
+    "取舍",
+    "易读上手"
+   ],
+   "机制": [
+    "构筑"
+   ],
+   "品类": [
+    "DBG"
+   ]
+  }
+ },
+ {
+  "slug": "DBG-成套卡牌让设计师控制组合与平衡",
+  "title": "成套卡牌：设计师控制组合，平衡也多了几个杠杆",
+  "insight": false,
+  "problem": "单卡模式下坏牌只能靠事件硬塞，组合靠运气，平衡只能改单卡",
+  "m": "同一套里的牌可以按主题和协同来组合。Card Hunter 的大镐：一张无视护甲的强穿刺、几张带代价的强牌，外加一张\"笨重\"负面牌；Card Quest 的诅咒匕首：两组只在这件装备上出现、互相配合的牌。平衡时可以把好牌调弱、坏牌调轻，或者换掉组内一张牌。移动牌只由靴子位提供，所以牌组里移动牌的数量自然合适",
+  "d": "玩家会主动带上\"好牌 + 坏牌\"的套装，再用其余牌去抵消坏牌；可行的流派更多；删牌、过滤的需求变小",
+  "a": "取舍感、表达",
+  "premise": "套装的边界要清楚（UI 要显示替换了哪些牌）",
+  "risk": "问答环节有人提出骰子构筑也是同一思路（一颗骰子 = 六个面一起进来），作者表示认同",
+  "source": "Alexander King《Don't Pick Just One: Set-Based Card Mechanics in Roguelike-Deckbuilders》Roguelike Celebration https://www.youtube.com/watch?v=uwiFwic03EE （按英文字幕核实）",
+  "related": [
+   {
+    "name": "DBG-成套加入卡牌把复杂度花在少量大决策上",
+    "note": "",
+    "slug": "DBG-成套加入卡牌把复杂度花在少量大决策上"
+   },
+   {
+    "name": "DBG-强效果必须带条件",
+    "note": "",
+    "slug": "DBG-强效果必须带条件"
+   }
+  ],
+  "extra": [],
+  "addedAt": "2026-10-17",
+  "groups": [
+   "取舍与策略",
+   "设计方法与工具"
+  ],
+  "tags": {
+   "体验": [
+    "取舍",
+    "表达"
+   ],
+   "机制": [
+    "构筑",
     "平衡"
    ],
    "品类": [
@@ -2999,6 +3813,7 @@
   "source": "Monster Train 2 开发者直播（https://www.youtube.com/watch?v=--fdN68uCnA），视频分析员语音转写的分段笔记 /workspace/bilibili-transcripts/YT--fdN68uCnA-MonsterTrain2-deckbuilder-design.md；人名经语音识别，可能有误",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "成长与力量"
   ],
@@ -3035,6 +3850,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "成长与力量"
   ],
@@ -3065,6 +3881,7 @@
   "source": "Paranoia游思考《从 Balatro 成功说起》https://www.gameres.com/905305.html",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "成长与力量"
   ],
@@ -3092,7 +3909,7 @@
   "a": "爆发感、掌控感",
   "premise": "单机，电脑被碾压不会难受",
   "risk": "太容易达成就失去挑战",
-  "source": "Maintainers Anonymous 播客 MA 8，Anthony Giovannetti（MegaCrit）访谈 https://maintainersanonymous.com/games/ ；用户阅读后整理，原文已核对（笔记 articles-talks/2026-10-13-杀戮尖塔设计师访谈.md）（22:57–25:02）",
+  "source": "Maintainers Anonymous 播客 MA 8，Anthony Giovannetti（MegaCrit）访谈 https://maintainersanonymous.com/games/ ；用户阅读后整理，原文已核对（笔记 articles-talks/2026-10-13-杀戮尖塔设计师访谈.md）（22:57–25:02）；Dan DiIorio《Luck be a Landlord - 10 Lessons Learned》https://www.youtube.com/watch?v=fSmaqjbU2xg （\"你做的不是国际象棋\"；倾向全体加强而不是削弱）",
   "related": [
    {
     "name": "DBG-本回合抽牌改下回合防无限连",
@@ -3106,6 +3923,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "成长与力量"
   ],
@@ -3145,6 +3963,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -3152,6 +3971,46 @@
    "体验": [],
    "机制": [
     "构筑"
+   ],
+   "品类": [
+    "DBG"
+   ]
+  }
+ },
+ {
+  "slug": "DBG-低概率效果不触发时也要有小收益",
+  "title": "低概率效果，没触发时也要给一点收益",
+  "insight": false,
+  "problem": "玩家高估小概率，结果拿了一堆什么都不干的牌",
+  "m": "煤炭原来是 0 金币，有 2% 概率变成 5 金币的钻石。一位测试者拿了三块煤，一块都没变，输了；下一局还是拿。作者事后问原因，答案是\"变了就赚了\"。于是改成 20 次旋转后必定变成钻石，并定下规则：带概率的符号，不触发时也要有一点小收益",
+  "d": "赌一把的乐趣还在，但不会因为没中而让构筑\"空掉\"",
+  "a": "挫败缓解、紧张感",
+  "premise": "测试时不要指导玩家；作者的原话是\"你不会和他们在一个房间里\"，所以要看他们自己怎么选，结束后再问",
+  "risk": "保底太多，概率效果就没意思了",
+  "source": "Dan DiIorio《Luck be a Landlord - 10 Lessons Learned》Roguelike Celebration https://www.youtube.com/watch?v=fSmaqjbU2xg （按英文字幕核实）",
+  "related": [
+   {
+    "name": "通用-可控随机让经验能对抗随机",
+    "note": "",
+    "slug": "通用-可控随机让经验能对抗随机"
+   },
+   {
+    "name": "DBG-自愿贪心让失败归因自己",
+    "note": "",
+    "slug": "DBG-自愿贪心让失败归因自己"
+   }
+  ],
+  "extra": [],
+  "addedAt": "2026-10-17",
+  "groups": [
+   "公平与可接受的失败"
+  ],
+  "tags": {
+   "体验": [
+    "挫败缓解"
+   ],
+   "机制": [
+    "随机"
    ],
    "品类": [
     "DBG"
@@ -3192,6 +4051,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "取舍与策略"
   ],
@@ -3234,6 +4094,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -3263,6 +4124,7 @@
   "source": "准则完整版见 https://indienova.com/indie-game-development/balatro-guidelines-for-joker-design/ ；另见 LocalThunk https://x.com/LocalThunk/status/1757409258554208259",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "发现与新鲜感"
   ],
@@ -3299,6 +4161,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "发现与新鲜感"
   ],
@@ -3341,6 +4204,7 @@
   "extra": [
    "补充（原文）：胜率统计站（Spire Logs）只能参考，因为卡的价值依赖上下文"
   ],
+  "addedAt": null,
   "groups": [
    "取舍与策略"
   ],
@@ -3370,6 +4234,7 @@
   "source": "LocalThunk 小丑设计准则 https://indienova.com/indie-game-development/balatro-guidelines-for-joker-design/",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "挑战与精通"
   ],
@@ -3411,6 +4276,7 @@
   "extra": [
    "补充（原文）：流派\"筒仓\"对新手有教学作用，比如看到 Catalyst（毒翻倍）就知道往哪走"
   ],
+  "addedAt": null,
   "groups": [
    "取舍与策略",
    "发现与新鲜感"
@@ -3442,6 +4308,7 @@
   "source": "云狐之境 https://cf1.me/game-design-of-balatro/",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "取舍与策略"
   ],
@@ -3477,6 +4344,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "取舍与策略"
   ],
@@ -3512,6 +4380,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "公平与可接受的失败"
   ],
@@ -3551,6 +4420,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -3586,6 +4456,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "取舍与策略"
   ],
@@ -3596,6 +4467,52 @@
    "机制": [
     "构筑",
     "卡池"
+   ],
+   "品类": [
+    "DBG"
+   ]
+  }
+ },
+ {
+  "slug": "DBG-玩家可以为流派而不是最优解而玩",
+  "title": "玩家可以为流派而玩，而不是为最优解",
+  "insight": false,
+  "problem": "肉鸽的随机让策略学习很难——同样的构筑和场景难以复现，输了不知道错在哪",
+  "m": "作者认为肉鸽用自己的方式绕开了这个问题：熟悉以后，很多玩家的目标从\"赢\"变成\"玩到某个流派\"（尖塔力量战、小刀贼，小丑牌人头流、同花流），这几乎不需要学习曲线；输了也是\"发牌员不给我发\"。对追求最优解的玩家，有三种缓解：印象深刻的局（小刀贼打不过关底老头，就学会了要有兜底）；统计式学习（打 100 局看哪个流派赢得多）；高黏性玩家的韧性",
+  "d": "作者的看法：玩家享受的往往是\"相信自己在接近最优解\"，而在肉鸽里，连这一点都可以放下",
+  "a": "表达、发现",
+  "premise": "要有辨识度高、能让人\"想玩到\"的流派",
+  "risk": "仍有大量轻度玩家打不过、又不知道错在哪，前期就退坑；作者认为不必追求杜绝，独立游戏要找准目标玩家",
+  "source": "东风（USTC 个人主页）《肉鸽游戏的游戏设计理论》http://home.ustc.edu.cn/~eastwind/_gd05_roguelike_game.html （2026-02，写作中的讲义，已读到第 2 章开头；部分段落原文即为占位 ***）",
+  "related": [
+   {
+    "name": "DBG-成长型路线胜率低却最受欢迎",
+    "note": "",
+    "slug": "DBG-成长型路线胜率低却最受欢迎"
+   },
+   {
+    "name": "通用-不必取悦所有人",
+    "note": "",
+    "slug": "通用-不必取悦所有人"
+   },
+   {
+    "name": "DBG-失败要能归因到自己的选择",
+    "note": "",
+    "slug": "DBG-失败要能归因到自己的选择"
+   }
+  ],
+  "extra": [],
+  "addedAt": "2026-10-17",
+  "groups": [
+   "表达与自由"
+  ],
+  "tags": {
+   "体验": [
+    "表达",
+    "挫败缓解"
+   ],
+   "机制": [
+    "构筑"
    ],
    "品类": [
     "DBG"
@@ -3615,6 +4532,7 @@
   "source": "Monster Train 2 开发者直播（https://www.youtube.com/watch?v=--fdN68uCnA），视频分析员语音转写的分段笔记 /workspace/bilibili-transcripts/YT--fdN68uCnA-MonsterTrain2-deckbuilder-design.md；人名经语音识别，可能有误",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "成长与力量"
   ],
@@ -3650,6 +4568,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "挑战与精通"
   ],
@@ -3679,6 +4598,7 @@
   "source": "LocalThunk 小丑设计准则（indienova 译文）https://indienova.com/indie-game-development/balatro-guidelines-for-joker-design/",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "取舍与策略"
   ],
@@ -3719,6 +4639,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "挑战与精通"
   ],
@@ -3759,6 +4680,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "成长与力量",
    "发现与新鲜感"
@@ -3806,6 +4728,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "取舍与策略"
   ],
@@ -3847,6 +4770,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "取舍与策略"
   ],
@@ -3859,6 +4783,50 @@
     "协同",
     "构筑",
     "节奏"
+   ],
+   "品类": [
+    "DBG"
+   ]
+  }
+ },
+ {
+  "slug": "DBG-移动是和攻防同级的资源",
+  "title": "移动作为和攻击、防御同级的资源",
+  "insight": false,
+  "problem": "卡牌战斗里，除了打和挡，还能有什么同样重要的选择",
+  "m": "Cobalt Core 的飞船是一维排列的部件，靠移动来让己方炮口对准敌方弱点、躲开敌方炮口；移动可以积攒，留到大回合一次花掉。敌人设计都在\"问一个移动问题\"：一处重击（晕住或躲开）；五处轻击（挡还是躲，还是直接打爆）；船体有缺口会让攻击落空；有的敌人每回合闪避第一击，要追着打；追踪导弹躲不掉，只能硬吃或者迎上去把它打下来",
+  "d": "有的战斗想主动移动，有的战斗最好一动不动；移动既用于防守也用于进攻",
+  "a": "取舍感、掌控感",
+  "premise": "信息一眼可读（参考 Into the Breach；像素分辨率逼着他们不往画面里塞过多信息）",
+  "risk": "越偏离标准的遭遇越费工，但作者认为回报也越大（如足球事件）",
+  "source": "Game Developer（Joel Couture）《How Cobalt Core makes movement as exciting as fighting…》https://www.gamedeveloper.com/design/how-cobalt-core-makes-movement-as-exciting-as-fighting-in-its-roguelike-deckbuilder-combat （2024-03-15，开发者访谈，已读原文）",
+  "related": [
+   {
+    "name": "DBG-战斗是当回合与整场的取舍",
+    "note": "",
+    "slug": "DBG-战斗是当回合与整场的取舍"
+   },
+   {
+    "name": "通用-信息透明让选择有意义",
+    "note": "",
+    "slug": "通用-信息透明让选择有意义"
+   }
+  ],
+  "extra": [
+   "关系（非来源结论）：对照用户鸦卫奇旅拆解的战斗意图\"信息公开，压力来自执行\"：Cobalt Core 也是公开意图，再用位置这个维度来增加选择"
+  ],
+  "addedAt": "2026-10-17",
+  "groups": [
+   "取舍与策略"
+  ],
+  "tags": {
+   "体验": [
+    "取舍",
+    "策略规划"
+   ],
+   "机制": [
+    "战斗",
+    "信息"
    ],
    "品类": [
     "DBG"
@@ -3889,6 +4857,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "发现与新鲜感"
   ],
@@ -3899,6 +4868,49 @@
    "机制": [
     "协同",
     "卡池"
+   ],
+   "品类": [
+    "DBG"
+   ]
+  }
+ },
+ {
+  "slug": "DBG-有趣优先于平衡加次要效果而不是调数值",
+  "title": "有趣优先于平衡：加一个次要效果，而不是去调数值",
+  "insight": false,
+  "problem": "内容的强度调对了，玩家还是不用，因为它无聊",
+  "m": "Luck be a Landlord 的花色符号：起初每个花色给所有相邻花色 +1，太强；改成只对同色生效后强度合适，但无聊。最后给每个花色加了一条次要效果\"花色数 ≥3 时多给 1 金币\"，玩家就开始用了。作者另一条经验叫\"vanilla is boring\"：同样是护甲，\"+12 防御，受伤两次后损毁\"比\"+5 防御\"更让人兴奋，哪怕后者更强；效果多了，还会冒出设计师没计划过的组合",
+  "d": "小规则上的变化，比把数值调一点、把出现率调一点更能让玩家去尝试",
+  "a": "发现、爆发感",
+  "premise": "单机，不用追求绝对公平（作者说\"你做的不是国际象棋\"：单机里敌人没有感受，玩家变得比敌人强会更开心）",
+  "risk": "效果一多复杂度就上来，作者用另一条经验\"复杂度慢慢引入\"来配合（见通用-复杂度要逐步展开而不是一次全给）",
+  "source": "Dan DiIorio《Luck be a Landlord - 10 Lessons Learned》Roguelike Celebration https://www.youtube.com/watch?v=fSmaqjbU2xg （按英文字幕核实）",
+  "related": [
+   {
+    "name": "DBG-单机允许过强但让其难达",
+    "note": "",
+    "slug": "DBG-单机允许过强但让其难达"
+   },
+   {
+    "name": "DBG-小丑单效果加可选条件",
+    "note": "",
+    "slug": "DBG-小丑单效果加可选条件"
+   }
+  ],
+  "extra": [],
+  "addedAt": "2026-10-17",
+  "groups": [
+   "发现与新鲜感",
+   "设计方法与工具"
+  ],
+  "tags": {
+   "体验": [
+    "新鲜感",
+    "爽感"
+   ],
+   "机制": [
+    "平衡",
+    "构筑"
    ],
    "品类": [
     "DBG"
@@ -3918,6 +4930,7 @@
   "source": "GGRecon 四位肉鸽卡牌主创圆桌（Kevin Chang / As We Descend）https://www.ggrecon.com/articles/roguelike-deckbuilder-roundtable-interview/",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "成长与力量"
   ],
@@ -3958,6 +4971,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -3993,6 +5007,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "取舍与策略"
   ],
@@ -4036,6 +5051,7 @@
   "extra": [
    "补充来源（用户见解，基于访谈整理）：设计师在访谈中说\"不安全的路径短期加难度、长期给回报，让玩家尝试贪婪，考验自己的判断\"（12:34）；\"每场战斗后的加牌是大选择\"（13:02）。来源：Maintainers Anonymous 播客 MA 8，Anthony Giovannetti（MegaCrit）访谈 https://maintainersanonymous.com/games/ ；用户阅读后整理，原文已核对（笔记 articles-talks/2026-10-13-杀戮尖塔设计师访谈.md）"
   ],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -4071,6 +5087,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -4100,6 +5117,7 @@
   "source": "https://www.gameres.com/905305.html",
   "related": [],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "公平与可接受的失败",
    "社交与协作"
@@ -4142,6 +5160,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "取舍与策略"
   ],
@@ -4174,6 +5193,7 @@
   "extra": [
    "补充来源（用户见解，基于访谈整理）：设计师在访谈中说\"不安全的路径短期加难度、长期给回报，让玩家尝试贪婪，考验自己的判断\"（12:34）；\"每场战斗后的加牌是大选择\"（13:02）。来源：Maintainers Anonymous 播客 MA 8，Anthony Giovannetti（MegaCrit）访谈 https://maintainersanonymous.com/games/ ；用户阅读后整理，原文已核对（笔记 articles-talks/2026-10-13-杀戮尖塔设计师访谈.md）"
   ],
+  "addedAt": null,
   "groups": [
    "风险与刺激",
    "公平与可接受的失败"
@@ -4215,6 +5235,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "挑战与精通"
   ],
@@ -4257,6 +5278,7 @@
   "extra": [
    "关系（非来源结论）：和用户的减法设计结论对照：Cain 这里批评的是\"按覆盖率砍\"，不是\"按主题砍\"。按主题判断，隐藏内容服务于\"发现\"就该留"
   ],
+  "addedAt": null,
   "groups": [
    "设计方法与工具"
   ],
@@ -4291,6 +5313,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "幻想与主题"
   ],
@@ -4327,6 +5350,7 @@
    }
   ],
   "extra": [],
+  "addedAt": null,
   "groups": [
    "发现与新鲜感"
   ],
