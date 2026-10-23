@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useOpening, useSectionMotion } from './motion';
 import { paginate } from './paginate';
+import ArticleCover from './ArticleCover.jsx';
 
 function Arrow({ down = false }) {
   return <svg className="arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d={down ? 'M12 4v16m-6-6 6 6 6-6' : 'M5 19 19 5M5 5h14v14'} stroke="currentColor" strokeWidth="1.4" /></svg>;
@@ -54,7 +55,7 @@ function ArticleCard({ item, onRead }) {
     card.style.setProperty('--my', `${event.clientY - rect.top}px`);
   };
   return <a onPointerMove={onMove} className="project-card" href={`#article/${item.id}`} onClick={onRead} aria-label={`阅读：${item.title}`}>
-    <div className="card-image"><div className="card-image-reveal"><img src={item.cover || `/media/${item.image}.jpg`} alt="" loading="lazy" /></div><div className="image-curtain" aria-hidden="true" /><span className="image-type">{item.category}</span><Arrow /></div>
+    <div className="card-image"><div className="card-image-reveal">{item.artCover ? <img src={item.artCover} alt="" loading="lazy" /> : <ArticleCover item={item} />}</div><div className="image-curtain" aria-hidden="true" /><span className="image-type">{item.category}</span><Arrow /></div>
     <div className="card-body"><div className="card-meta">{item.tags.join(' / ')}</div><h3>{item.title}</h3><p>{item.desc}</p><div className="card-footer"><span>{item.type}</span><span>阅读笔记 ↗</span></div></div>
   </a>;
 }
@@ -80,7 +81,7 @@ export function Archive({ categories, articles, active, onSelect, archiveView, o
     if (next !== undefined) { event.preventDefault(); onSelect(filters[next].id); document.getElementById(`tab-${filters[next].id}`).focus(); }
   }
   return <section ref={root} id={archiveView ? 'archive' : 'work'} className={`work-section ${archiveView ? 'archive-view' : ''}`} aria-labelledby="work-title"><div className="container">
-    <div className="section-display" aria-hidden="true"><span>{archiveView ? 'ARCHIVE.' : 'BEHIND'}</span><span>{archiveView ? 'INDEX' : 'THE PLAY.'}</span></div><div className="section-rule" /><div className="work-heading"><div><span className="section-overline">{archiveView ? 'THE ARCHIVE' : 'NOTES & IDEAS'}</span><h2 id="work-title">{archiveView ? '文章归档' : '思考与记录'}<span className="heading-dot">.</span></h2></div><p>记录设计方法，拆解游玩体验，<br />也收集那些值得带走的灵感。</p></div>
+    <div className="section-display" aria-hidden="true"><span>{archiveView ? 'ARCHIVE.' : 'BEHIND'}</span><span>{archiveView ? 'INDEX' : 'THE PLAY.'}</span></div><div className="section-rule" /><div className="work-heading"><h2 id="work-title" className="visually-hidden">{archiveView ? '文章归档' : '思考与记录'}</h2><p>记录设计方法，拆解游玩体验，<br />也收集那些值得带走的灵感。</p></div>
     <div className="filter-bar"><div className="tabs" role="tablist" aria-label="文章分类">{filters.map((c, i) => <button key={c.id} id={`tab-${c.id}`} role="tab" aria-selected={active === c.id} aria-controls="article-panel" tabIndex={active === c.id ? 0 : -1} onKeyDown={e => navigateTab(e, i)} onClick={() => onSelect(c.id)}>{c.cn}<span>{c.id === 'all' ? articles.length : c.items.length}</span></button>)}</div><span className="article-count">{String(filtered.length).padStart(2, '0')} 篇笔记</span></div>
     <div role="tabpanel" id="article-panel" aria-labelledby={`tab-${active}`} tabIndex={0}>
       {archiveView ? <div className="archive-list">{shown.map((item, index) => <a key={item.id} href={`#article/${item.id}`} onClick={onRead} className="archive-item"><span className="archive-index">{String(index + 1).padStart(2, '0')}</span><div><span className="card-meta">{item.category} / {item.type}</span><h3>{item.title}</h3></div><Arrow /></a>)}</div> : <div className="card-grid">{shown.map(item => <ArticleCard key={item.id} item={item} onRead={onRead} />)}</div>}

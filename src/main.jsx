@@ -8,7 +8,7 @@ import { DesignCardsEntry, CardsPage } from './DesignCards';
 import { parseCardsRoute } from './cardRoute';
 import './styles.css';
 
-const articles = sortPosts(categories.flatMap(category => category.items.map((item, index) => ({ ...item, id: `${category.id}-${item.slug || index + 1}`, category: category.cn, categoryId: category.id }))));
+const articles = sortPosts(categories.flatMap(category => category.items.map((item, index) => ({ ...item, id: `${category.id}-${item.slug || index + 1}`, category: category.cn, categoryId: category.id, categoryEn: category.en, categoryColor: category.color, artCover: category.artCovers && item.cover }))));
 function App() {
   const [active, setActive] = useState('all');
   const [hash, setHash] = useState(location.hash);

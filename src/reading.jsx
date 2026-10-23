@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import ArticleCover from './ArticleCover.jsx';
 
 function Inline({ text }) {
   const parts = String(text).split(/(\[[^\]]+\]\([^)\s]+\))/g);
@@ -34,7 +35,7 @@ export function ArticlePage({ item, returnHref = '#work' }) {
   }, [item]);
   return <div className="reading-page"><header className="reading-nav container"><a className="wordmark" href="#home">P<span>/</span>M.</a><a href={returnHref}>← 返回文章列表</a></header>
     <main className="reading-main"><div className="reading-breadcrumb"><a href={returnHref}>文章</a><span>/</span><span>{item?.category || '文章'}</span></div><h1 tabIndex={-1} ref={title}>{item?.title || '没有找到这篇文章'}</h1>
-    {item ? <><div className="reading-meta"><span>{item.type}</span><span>{item.tags.join(' / ')}</span></div><p className="reading-lead">{item.desc}</p><img className="reading-cover" src={item.cover || `/media/${item.image}.jpg`} alt="" /><div className="reading-body">{item.body.map((block, index) => <BodyBlock key={index} block={block} />)}</div></> : <p>链接可能已变更，你可以返回设计档案查看其他笔记。</p>}
+    {item ? <><div className="reading-meta"><span>{item.type}</span><span>{item.tags.join(' / ')}</span></div><p className="reading-lead">{item.desc}</p>{item.cover ? <img className="reading-cover" src={item.cover} alt="" /> : <ArticleCover item={item} className="reading-cover" />}<div className="reading-body">{item.body.map((block, index) => <BodyBlock key={index} block={block} />)}</div></> : <p>链接可能已变更，你可以返回设计档案查看其他笔记。</p>}
     <div className="reading-footer"><a href={returnHref}>← 返回文章列表</a><a href="#archive">浏览全部归档 ↗</a></div></main></div>;
 }
 

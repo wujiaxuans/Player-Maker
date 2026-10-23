@@ -59,7 +59,7 @@ function DailyStack({ date, home = false }) {
   const [detail, setDetail] = useState(null);
   const controls = <div className="daily-controls"><span className="num" aria-live="polite">{pad(top + 1)} <i>/ {pad(picks.length)}</i></span><button type="button" onClick={() => setNext(n => n + 1)}>下一张 <span>→</span></button></div>;
   return <div className={`daily-feature${home ? ' daily-feature-home' : ''}`}>
-    {home ? <header className="daily-home-heading"><div><span className="discovery-eyebrow">THE DAILY THREE</span><h3>今日推荐<span className="heading-dot">.</span></h3></div><time>{date.replaceAll('-', '.')}</time></header> : <div className="daily-copy"><span className="discovery-eyebrow">DAILY DRAW / {date.replaceAll('-', '.')}</span><h3>今天，<br />从这三张开始<span>.</span></h3><p>换一个角度，看看熟悉的设计问题。<br />每天三张，留一点新的思路。</p>{!home && controls}<small>拖动卡片换一张 · 每日零点更新</small></div>}
+    {home ? <header className="daily-home-heading"><h3>今日推荐</h3><time>{date.replaceAll('-', '.')}</time></header> : <div className="daily-copy"><span className="discovery-eyebrow">DAILY DRAW / {date.replaceAll('-', '.')}</span><h3>今天，<br />从这三张开始</h3><p>换一个角度，看看熟悉的设计问题。<br />每天三张，留一点新的思路。</p>{!home && controls}<small>拖动卡片换一张 · 每日零点更新</small></div>}
 
     <div className="daily-stack-wrap"><Suspense fallback={<div className="daily-stack-loading">正在整理今日卡片…</div>}><Stack key={date} nextSignal={next} layout="fan" visible={3} spread={.85} depth={.25} tilt={12} speed={.75} radius={14} sendToBackOnClick={false} autoplay={false} onChange={setTop}
       cards={picks.map(card => <div className="daily-card" key={card.slug} style={cardTheme(card)}><div className="daily-card-category"><span className="dc-category-dot" />{card.groups[0]}<span>DAILY PICK</span></div><h4>{card.title}</h4><p>{card.problem}</p><CardArtwork slug={card.slug} /><div className="daily-card-bottom"><span>{card.tags.品类.join(' · ')}</span><button type="button" onClick={() => setDetail(card)}>查看详情 ↗</button></div></div>)} /></Suspense></div>
@@ -70,7 +70,7 @@ function DailyStack({ date, home = false }) {
 function RecentList({ date }) {
   const latest = recentCards(cards, date);
   const [detail, setDetail] = useState(null);
-  return <aside className="recent-feature"><div className="recent-heading"><span className="discovery-eyebrow">FRESH NOTES / 近三天</span><h3>最近新增<span className="heading-dot">.</span><small>{pad(latest.length)}</small></h3></div>
+  return <aside className="recent-feature"><div className="recent-heading"><h3>近三天新增<small>{pad(latest.length)}</small></h3></div>
     {latest.length ? <div className="recent-list">{latest.slice(0,4).map(card => <button key={card.slug} onClick={() => setDetail(card)}><time>{card.addedAt.slice(5).replace('-', '.')}</time><span>{card.title}<small>{card.groups[0]}</small></span><b>↗</b></button>)}</div> : <div className="recent-empty"><span aria-hidden="true">＋</span><h4>新的想法，正在路上。</h4><p>最近三天暂无新增卡片。<br />先从今天的推荐里，找一点灵感。</p></div>}
     <a className="recent-all" href="#cards/recent">查看最近新增 <span>↗</span></a>
     {detail && <DiscoveryDetail card={detail} onClose={() => setDetail(null)} />}
@@ -86,9 +86,9 @@ export function DesignCardsEntry() {
   const onMove = e => { const r = e.currentTarget.getBoundingClientRect(); e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`); e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`); };
   return <section ref={root} id="card-entry" className="work-section dc-section" aria-labelledby="cards-title"><div className="container">
     <div className="section-display" aria-hidden="true"><span>DESIGN</span><span>CARDS.</span></div><div className="section-rule" />
-    <div className="work-heading dc-heading"><div><h2 id="cards-title">设计卡片<span className="heading-dot">.</span></h2></div><p>9 种玩家体验 + 1 组设计方法，共 {cards.length} 张。<br />每张写清：解决什么问题、怎么做、前提和代价。</p></div>
+    <div className="work-heading dc-heading"><h2 id="cards-title" className="visually-hidden">设计卡片</h2><p>9 种玩家体验 + 1 组设计方法，共 {cards.length} 张。每张写清：解决什么问题、怎么做、前提和代价。</p></div>
     <div className="dc-discovery"><DailyStack key={date} date={date} home /><RecentList date={date} /></div>
-    <div className="dc-bento-label"><span>按体验探索</span><span>EXPLORE BY EXPERIENCE</span></div>
+    <div className="dc-bento-label"><span>按体验探索</span></div>
     <div className="dc-bento">{GROUPS.map((g, i) => {
       const wide = i === 0 || i === 9;
       const samples = cards.filter(c => c.groups.includes(g)).slice(0, wide ? 2 : 1);
@@ -234,7 +234,7 @@ export function CardsPage({ group, focus, view }) {
   return <div className="reading-page dc-page"><header className="reading-nav container"><a className="wordmark" href="#home">P<span>/</span>M.</a><span className="dc-nav-caption">DESIGN LIBRARY / 设计卡片</span><a href="#card-entry">← 返回首页</a></header>
     <main className="container dc-page-main">
       <aside className="dc-sidebar" aria-label="卡片分类与筛选">
-        <div className="dc-sidebar-heading"><span>THE COLLECTION</span><h2>设计卡片<span className="heading-dot">.</span></h2><p>从一种体验，找到一个设计切口。</p></div>
+        <div className="dc-sidebar-heading"><h2>设计卡片</h2><p>从一种体验，找到一个设计切口。</p></div>
         <nav className="dc-discovery-nav" aria-label="发现卡片"><span>为你发现</span><a href="#cards/today" aria-current={view === 'today' ? 'page' : undefined}>今日推荐 <sup>03</sup></a><a href="#cards/recent" aria-current={view === 'recent' ? 'page' : undefined}>最近新增 <sup>{recent.length}</sup></a></nav>
         <nav className="dc-gtabs" aria-label="体验分组">
           {[null, ...GROUPS].map((g, i) => <a key={g || 'all'} href={cardsHref(g)} aria-current={!view && (group || null) === g ? 'page' : undefined} style={{ '--category-color': g ? GROUP_COLORS[i - 1] : '#d5f36b' }}><span className="dc-category-dot" /><span>{g || '全部卡片'}</span><sup className="num">{g ? counts[g] : cards.length}</sup></a>)}
@@ -247,8 +247,8 @@ export function CardsPage({ group, focus, view }) {
           {anyTag && <div className="dc-selected-tags">{TAG_DIMS.flatMap(dim => tags[dim].map(t => <span key={dim + t} className="chip">{t}<button type="button" className="x" aria-label={`移除 ${t}`} onClick={() => toggleTag(dim, t)}>×</button></span>))}</div>}
         </div>}
       </aside>
-      {view === 'today' ? <section className="dc-workspace dc-today-workspace" aria-label="今日推荐"><div className="dc-phead"><span className="dc-workspace-overline">A LITTLE INSPIRATION, EVERY DAY</span><h1 className="dc-page-title">今日推荐<span className="heading-dot">.</span></h1></div><DailyStack key={date} date={date} /></section> : <section className="dc-workspace" aria-label="卡片浏览">
-        <div className="dc-toolbar"><div className="dc-phead"><span className="dc-workspace-overline">EXPLORE THE DECK</span><h1 className="dc-page-title">{view === 'recent' ? '最近三天新增' : group || '全部设计卡片'}<span className="heading-dot">.</span></h1><p>{view === 'recent' ? '今天与前两天加入的卡片，按新增日期排列。' : group ? GROUP_DESC[group] : ALL_DESC(cards.length)}</p></div>
+      {view === 'today' ? <section className="dc-workspace dc-today-workspace" aria-label="今日推荐"><div className="dc-phead"><h1 className="dc-page-title">今日推荐</h1></div><DailyStack key={date} date={date} /></section> : <section className="dc-workspace" aria-label="卡片浏览">
+        <div className="dc-toolbar"><div className="dc-phead"><h1 className="dc-page-title">{view === 'recent' ? '最近三天新增' : group || '全部设计卡片'}</h1><p>{view === 'recent' ? '今天与前两天加入的卡片，按新增日期排列。' : group ? GROUP_DESC[group] : ALL_DESC(cards.length)}</p></div>
           <div className="tr"><span className="count"><strong className="num">{total}</strong> 张卡片</span><span className="vsep" />
           <button type="button" className="arrow" aria-label="向左浏览" disabled={atStart || !total} onClick={() => select(index - 1)}>←</button>
           <button type="button" className="arrow" aria-label="向右浏览" disabled={atEnd || !total} onClick={() => select(index + 1)}>→</button></div>
