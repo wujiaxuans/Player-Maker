@@ -28,15 +28,32 @@ function listItem(raw) {
   return clean(raw);
 }
 
+/** Table row `| a | b |` → ['a', 'b']; `\|` stays a literal pipe. */
+const tableCells = line => line.trim().replace(/^\|/, '').replace(/(?<!\\)\|$/, '').split(/(?<!\\)\|/).map(c => clean(c.replace(/\\\|/g, '|')));
+const TABLE_SEP = /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)*\|?\s*$/;
+
+/** GFM table → { table: { head, align, rows } }; lines without a separator row stay paragraphs. */
+function tableBlock(lines) {
+  if (lines.length < 2 || !TABLE_SEP.test(lines[1])) return lines.map(clean);
+  const head = tableCells(lines[0]);
+  const align = tableCells(lines[1]).map(c => c.startsWith(':') && c.endsWith(':') ? 'center' : c.endsWith(':') ? 'right' : c.startsWith(':') ? 'left' : null);
+  const rows = lines.slice(2).map(line => head.map((_, i) => tableCells(line)[i] ?? ''));
+  return [{ table: { head, align: align.slice(0, head.length), rows } }];
+}
+
 export function markdownToBlocks(md) {
   const blocks = [];
   let para = [];
   let list = null;
+  let table = [];
   const flushPara = () => { if (para.length) blocks.push(clean(para.join(''))); para = []; };
   const flushList = () => { if (list) blocks.push(list); list = null; };
+  const flushTable = () => { if (table.length) blocks.push(...tableBlock(table)); table = []; };
   for (const raw of String(md).replace(/\r\n/g, '\n').split('\n')) {
     const line = raw.trimEnd();
     let m;
+    if (/^\s*\|.*\|$/.test(line)) { flushPara(); flushList(); table.push(line); continue; }
+    flushTable();
     if (!line.trim()) { flushPara(); flushList(); continue; }
     if (/^\s*(---|\*\*\*)\s*$/.test(line)) { flushPara(); flushList(); continue; }
     if ((m = line.match(/^(#{1,4})\s+(.*)$/))) {
@@ -52,7 +69,7 @@ export function markdownToBlocks(md) {
     flushList();
     para.push(line.replace(/^>\s?/, ''));
   }
-  flushPara(); flushList();
+  flushTable(); flushPara(); flushList();
   return blocks;
 }
 

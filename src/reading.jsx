@@ -20,6 +20,7 @@ export function BodyBlock({ block }) {
   if (block.h3) return <h3 className="reading-subhead3">{block.h3}</h3>;
   if (block.h4) return <h4 className="reading-label">{block.h4}</h4>;
   if (block.h) return <h2 className="reading-subhead">{block.h}</h2>;
+  if (block.table) { const { head, align, rows } = block.table; return <div className="reading-table" tabIndex={0}><table><thead><tr>{head.map((cell, i) => <th key={i} style={{ textAlign: align[i] || undefined }}><Inline text={cell} /></th>)}</tr></thead><tbody>{rows.map((row, r) => <tr key={r}>{row.map((cell, i) => <td key={i} style={{ textAlign: align[i] || undefined }}><Inline text={cell} /></td>)}</tr>)}</tbody></table></div>; }
   if (block.img) return <figure className="reading-figure"><img src={block.img} alt={block.alt || ''} loading="lazy" />{block.caption && <figcaption>{block.caption}</figcaption>}</figure>;
   return null;
 }

@@ -28,6 +28,12 @@ await t('markdown blocks', () => {
   assert.deepEqual(titled, [{ ol: [{ t: '设计师想做什么', d: '先写目的。' }, 'plain'] }]);
 });
 
+await t('markdown tables', () => {
+  const b = markdownToBlocks('前文\n| 秘境 | 规则 | 数值 |\n|:---|:---:|---:|\n| **火** | 灼烧 a\\|b | 3 |\n| 风 | [风向](#x) |\n后文');
+  assert.deepEqual(b, ['前文', { table: { head: ['秘境', '规则', '数值'], align: ['left', 'center', 'right'], rows: [['火', '灼烧 a|b', '3'], ['风', '[风向](#x)', '']] } }, '后文']);
+  assert.deepEqual(markdownToBlocks('| not | a table |'), ['| not | a table |']);
+});
+
 await t('posts sort newest first with tie-breakers', () => {
   const posts = [
     { title: 'b', date: '2026-10-14', order: 10 },
