@@ -5,6 +5,7 @@ import assert from 'node:assert/strict';
 import { generateKeyPairSync, createSign } from 'node:crypto';
 import { comparePosts, sortPosts } from '../src/sort.js';
 import { markdownToBlocks, postFromMarkdown, parseFrontMatter } from '../src/markdown.js';
+import { articleOutline, hasOutline, readingMinutes } from '../src/articleOutline.js';
 import { verifyAccessJwt, authenticate } from '../functions/_lib/auth.js';
 import { buildPost } from '../functions/api/publish.js';
 import { draftPath, draftFileName, titleFromNote, DRAFT_NAME_RE, postPath, draftNameFromPost, CATEGORY_RE, SLUG_RE } from '../functions/_lib/github.js';
@@ -23,15 +24,31 @@ let n = 0; const t = async (name, fn) => { await fn(); n++; console.log('ok', na
 
 await t('markdown blocks', () => {
   const b = markdownToBlocks('# T\n\n## 00:00 开场\n- a **b**\n- c\n\n1. x\n2. y\n\npara\nline\n\n### s\n#### l\n![cap](/a.png)');
-  assert.deepEqual(b, [{ h: '00:00 开场' }, { ul: ['a b', 'c'] }, { ol: ['x', 'y'] }, 'paraline', { h3: 's' }, { h4: 'l' }, { img: '/a.png', alt: 'cap', caption: 'cap' }]);
+  assert.deepEqual(b, [{ h: '00:00 开场' }, { ul: ['a **b**', 'c'] }, { ol: ['x', 'y'] }, 'paraline', { h3: 's' }, { h4: 'l' }, { img: '/a.png', alt: 'cap', caption: 'cap' }]);
   const titled = markdownToBlocks('1. **设计师想做什么**：先写目的。\n2. plain');
   assert.deepEqual(titled, [{ ol: [{ t: '设计师想做什么', d: '先写目的。' }, 'plain'] }]);
 });
 
 await t('markdown tables', () => {
   const b = markdownToBlocks('前文\n| 秘境 | 规则 | 数值 |\n|:---|:---:|---:|\n| **火** | 灼烧 a\\|b | 3 |\n| 风 | [风向](#x) |\n后文');
-  assert.deepEqual(b, ['前文', { table: { head: ['秘境', '规则', '数值'], align: ['left', 'center', 'right'], rows: [['火', '灼烧 a|b', '3'], ['风', '[风向](#x)', '']] } }, '后文']);
+  assert.deepEqual(b, ['前文', { table: { head: ['秘境', '规则', '数值'], align: ['left', 'center', 'right'], rows: [['**火**', '灼烧 a|b', '3'], ['风', '[风向](#x)', '']] } }, '后文']);
   assert.deepEqual(markdownToBlocks('| not | a table |'), ['| not | a table |']);
+});
+
+await t('markdown keeps emphasis in body text and quotes', () => {
+  const b = markdownToBlocks('## **标题**\n\n结论是**押对了**。\n> 第一段**重点**\n> 接着\n>\n> 第二段\n后文\n\n1. **赌注在升高**。输一场扣分\n2. **条目**：说明**重点**');
+  assert.deepEqual(b, [{ h: '标题' }, '结论是**押对了**。', { quote: ['第一段**重点**接着', '第二段'] }, '后文', { ol: ['**赌注在升高**。输一场扣分', { t: '条目', d: '说明**重点**' }] }]);
+});
+
+await t('article outline and reading time', () => {
+  const body = [{ h: '一' }, 'x', { h3: '一点一' }, { img: '/long-image-name.png', alt: '图' }, { h4: '不进目录' }, { h: '二' }];
+  assert.deepEqual(articleOutline(body), [{ id: 'section-0', level: 2, text: '一' }, { id: 'section-2', level: 3, text: '一点一' }, { id: 'section-5', level: 2, text: '二' }]);
+  assert.equal(readingMinutes(['字'.repeat(400)]), 1);
+  assert.equal(readingMinutes(['字'.repeat(401), { ul: [{ t: 'ab', d: '[链接](https://example.com/a/b/c)' }] }, { table: { head: ['表'], align: ['left'], rows: [['格']] } }]), 2);
+  assert.equal(readingMinutes([{ img: '/a.png', alt: '字'.repeat(900) }]), 1);
+  assert.equal(hasOutline(articleOutline(body), 3), false);
+  assert.equal(hasOutline([{ level: 2 }, { level: 2 }, { level: 2 }], 2), false);
+  assert.equal(hasOutline([{ level: 2 }, { level: 2 }, { level: 2 }], 3), true);
 });
 
 await t('posts sort newest first with tie-breakers', () => {
@@ -53,7 +70,7 @@ await t('publish builds credited post with draft_id', () => {
   const p = postFromMarkdown(out, 'x');
   assert.equal(p.title, '新标题'); assert.equal(p.source, 'https://www.bilibili.com/video/BV1'); assert.deepEqual(p.tags, ['a']);
   assert.equal(p.cover, '/media/covers/BV1.png');
-  assert.match(p.body[0], /原视频：\[视频\]\(https:\/\/www\.bilibili\.com\/video\/BV1\)，UP主：某UP/);
+  assert.match(p.body[0].quote[0], /原视频：\[视频\]\(https:\/\/www\.bilibili\.com\/video\/BV1\)，UP主：某UP/);
   assert.deepEqual(p.body[1], { h: '一句话' });
   assert.equal(parseFrontMatter(out).data.draft_id, 'BV1mbDSB5EGx');
   assert.throws(() => buildPost('# no meta', {}), /source/);

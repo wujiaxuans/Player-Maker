@@ -6,7 +6,6 @@ desc: "先看设计师怎么想，再看整局循环和分层机制，最后写�
 tags: ["拆解方法","核心循环","MDA"]
 date: "2026-10-14"
 image: "architecture"
-cover: "/media/posts/breakdown-method/cover.png"
 order: 1
 draft_id: "site-methods-breakdown-method"
 source: "site://methods/breakdown-method"
